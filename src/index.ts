@@ -8,7 +8,6 @@ import {
   ItemSoldEvent,
   ItemTransferredEvent
 } from './types';
-import { WebSocket } from 'ws';
 
 const ALL = '*';
 
@@ -30,18 +29,21 @@ export class OpenSeaPushClient {
     this.socket.connect();
     this.channels = new Map<string, Channel>();
   }
+
   public subscribe_item_metadata_updates(
     collection_slug: string = ALL,
     callback: (arg: ItemMetadataUpdate) => any
   ): void {
     this.subscribe(EventType.ITEM_METADATA_UPDATED, collection_slug, callback);
   }
+
   public subscribe_item_listed_events(
     collection_slug: string = ALL,
     callback: (arg: ItemListedEvent) => any
   ): void {
     this.subscribe(EventType.ITEM_LISTED, collection_slug, callback);
   }
+
   public subscribe_item_sold_events(
     collection_slug: string = ALL,
     callback: (arg: ItemSoldEvent) => any
@@ -93,42 +95,3 @@ export class OpenSeaPushClient {
     return channel;
   }
 }
-
-const client = new OpenSeaPushClient('', {
-  apiUrl: 'ws://127.0.0.1:4000/socket',
-  socketOptions: {
-    transport: WebSocket
-  }
-});
-
-// client.subscribe_item_listed_events('untitled-collection-3067283', (a) => {
-//   console.log(a);
-//   return a;
-// });
-
-client.subscribe_item_listed_events('untitled-collection-2881457', (a) => {
-  console.log(a);
-  return a;
-});
-
-client.subscribe_item_sold_events('untitled-collection-2881457', (a) => {
-  console.log(a);
-  return a;
-});
-// client.subscribe_item_listed_events('*', (a) => {
-//   console.log(a);
-//   return a;
-// });
-// client.subscribe_item_sold_events('untitled-collection-3067283', (a) => {
-//   console.log(a);
-//   return a;
-// });
-// client.subscribe_item_sold_events('*', (a) => {
-//   console.log(a);
-//   return a;
-// });
-// client.subscribe_item_transferred_events('untitled-collection-3067283', (a) => {
-//   console.log(a);
-//   return a;
-// });
-// cl
