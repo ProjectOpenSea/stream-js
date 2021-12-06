@@ -30,41 +30,42 @@ export class OpenSeaPushClient {
     this.channels = new Map<string, Channel>();
   }
 
-  public subscribe_item_metadata_updates(
+  public subscribeItemMetadataUpdates(
     collection_slug: string = ALL,
     callback: (arg: ItemMetadataUpdate) => any
   ): void {
     this.subscribe(EventType.ITEM_METADATA_UPDATED, collection_slug, callback);
   }
 
-  public subscribe_item_listed_events(
+  public subscribeItemListedEvents(
     collection_slug: string = ALL,
     callback: (arg: ItemListedEvent) => any
   ): void {
     this.subscribe(EventType.ITEM_LISTED, collection_slug, callback);
   }
 
-  public subscribe_item_sold_events(
+  public subscribeItemSoldEvents(
     collection_slug: string = ALL,
     callback: (arg: ItemSoldEvent) => any
   ): void {
     this.subscribe(EventType.ITEM_SOLD, collection_slug, callback);
   }
 
-  public subscribe_item_transferred_events(
+  public subscribeItemTransferredEvents(
     collection_slug: string = ALL,
     callback: (arg: ItemTransferredEvent) => any
   ): void {
     this.subscribe(EventType.ITEM_TRANSFERRED, collection_slug, callback);
   }
 
-  public subscribe_all_item_events(
+  public subscribeAllItemEvents(
     collection_slug: string = ALL,
     callback: (arg: BasePushedUpdateMessage) => any
   ): void {
-    this.subscribe_item_listed_events(collection_slug, callback);
-    this.subscribe_item_sold_events(collection_slug, callback);
-    this.subscribe_item_transferred_events(collection_slug, callback);
+    this.subscribeItemListedEvents(collection_slug, callback);
+    this.subscribeItemSoldEvents(collection_slug, callback);
+    this.subscribeItemTransferredEvents(collection_slug, callback);
+    this.subscribeItemMetadataUpdates(collection_slug, callback);
   }
 
   private subscribe(
@@ -73,11 +74,11 @@ export class OpenSeaPushClient {
     callback: (arg0: BasePushedUpdateMessage) => any
   ): void {
     const topic = 'collection:' + collection_slug;
-    const channel = this.get_channel(topic);
+    const channel = this.getChannel(topic);
     channel.on(event_type, callback);
   }
 
-  private get_channel(topic: string): Channel {
+  private getChannel(topic: string): Channel {
     let channel = this.channels.get(topic);
     if (channel != undefined) {
       return channel;
