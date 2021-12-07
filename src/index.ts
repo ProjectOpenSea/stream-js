@@ -75,10 +75,7 @@ export class OpenSeaPushClient {
   ): void {
     const topic = 'collection:' + collection_slug;
     const channel = this.getChannel(topic);
-    channel.on(event_type, (obj) => {
-      callback(obj);
-      return obj;
-    });
+    channel.on(event_type, callback);
   }
 
   private getChannel(topic: string): Channel {

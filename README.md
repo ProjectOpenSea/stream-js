@@ -71,7 +71,6 @@ client.subscribeItemTransferredEvents('collection-slug', (myEvent) => {
 ```javascript 
 client.subscribeAllItemEvents('collection-slug', (myEvent) => {
   console.log(myEvent);
-  return myEvent;
 });
 ```
 
