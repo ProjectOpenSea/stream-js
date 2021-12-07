@@ -7,7 +7,7 @@ A Javascript SDK for receiving updates from OpenSea pushed over websocket. We cu
 - item transferred
 - item metadata updates 
 
-This is a best effort delievery messaging system. Messages that are not received due to connection errors will not be resent. Messages may be delievered out of order. 
+This is a best effort delievery messaging system. Messages that are not received due to connection errors will not be re-sent. Messages may be delievered out of order. 
 
 # Setup 
 
