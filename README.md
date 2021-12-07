@@ -39,7 +39,6 @@ After successfully connecting to our websocket it is time to listen to specific 
 client.subscribeItemMetadataUpdates('collection-slug', (myEvent) => {
   // Your use case
   console.log(myEvent);
-  return myEvent;
 });
 ```
 
@@ -48,7 +47,6 @@ client.subscribeItemMetadataUpdates('collection-slug', (myEvent) => {
 ```javascript 
 client.subscribeItemListedEvents('collection-slug', (myEvent) => {
   console.log(myEvent);
-  return myEvent;
 });
 ```
 
@@ -57,7 +55,6 @@ client.subscribeItemListedEvents('collection-slug', (myEvent) => {
 ```javascript 
 client.subscribeItemSoldEvents('collection-slug', (myEvent) => {
   console.log(myEvent);
-  return myEvent;
 });
 ```
 
@@ -66,7 +63,6 @@ client.subscribeItemSoldEvents('collection-slug', (myEvent) => {
 ```javascript 
 client.subscribeItemTransferredEvents('collection-slug', (myEvent) => {
   console.log(myEvent);
-  return myEvent;
 });
 ```
 
