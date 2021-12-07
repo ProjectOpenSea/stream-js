@@ -24,9 +24,10 @@ export type BasePushedUpdateMessage = {
     name: string;
   };
   event_type: string;
-  timestamp: number;
+  timestamp: string;
   payload: any;
 };
+
 export type Trait = {
   trait_type: string;
   value: string;
@@ -35,6 +36,7 @@ export type Trait = {
   trait_count: string;
   order: number;
 };
+
 export type ItemMetadataUpdatePayload = {
   name: string;
   description: string;
@@ -48,7 +50,6 @@ export type ItemMetadataUpdatePayload = {
   metadata_url: string;
   traits: [Trait];
 };
-
 export interface ItemMetadataUpdate extends BasePushedUpdateMessage {
   payload: ItemMetadataUpdatePayload;
 }
@@ -58,9 +59,14 @@ export type Account = {
 };
 
 export type PaymentToken = {
-  // TODO
-  type: string;
+  address: string;
+  decimals: number;
+  eth_price: string;
+  name: string;
+  symbol: string;
+  usd_price: string;
 };
+
 export type ItemListedEventPayload = {
   quantity: number;
   listing_type: string;
@@ -78,9 +84,10 @@ export interface ItemListedEvent extends BasePushedUpdateMessage {
 }
 
 export type Transaction = {
-  // TODO
   hash: string;
+  timestamp: string;
 };
+
 export type ItemSoldEventPayload = {
   quantity: number;
   listing_type: string;
@@ -97,9 +104,12 @@ export type ItemSoldEventPayload = {
 export interface ItemSoldEvent extends BasePushedUpdateMessage {
   payload: ItemSoldEventPayload;
 }
+
 export type ItemTransferredEventPayload = {
-  // TODO
-  something: string;
+  from_acount: Account;
+  quantity: number;
+  to_account: Account;
+  transaction: Transaction;
 };
 
 export interface ItemTransferredEvent extends BasePushedUpdateMessage {
