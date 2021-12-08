@@ -76,7 +76,7 @@ client.subscribeAllItemEvents('collection-slug', (myEvent) => {
 
 # Subscribing to events from all collections 
 
-If you'd like to listen to an events from all collections use wildcard `*` for the `collection_slug` parameter. 
+If you'd like to listen to an event from all collections use wildcard `*` for the `collection_slug` parameter. 
 
 # Types 
 
