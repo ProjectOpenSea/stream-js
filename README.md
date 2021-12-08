@@ -20,7 +20,7 @@ For our beta test users we are only using basic authentication. To get started, 
 
 ## Start a socket connection 
 ```javascript 
-import { OpenSeaPushClient } from 'opensea_push_client'  
+import { OpenSeaPushClient } from 'opensea-push-client'  
 import { WebSocket } from 'ws';
 
 const client = new OpenSeaPushClient('dummy_token', {
@@ -73,6 +73,10 @@ client.subscribeAllItemEvents('collection-slug', (myEvent) => {
   console.log(myEvent);
 });
 ```
+
+# Subscribing to events from all collections 
+
+If you'd like to listen to an events from all collections use wildcard `*` for the `collection_slug` parameter. 
 
 # Types 
 
