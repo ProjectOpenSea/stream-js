@@ -1,11 +1,11 @@
 {
-  "name": "opensea_push_client",
+  "name": "opensea-push-client",
   "version": "1.0.0",
   "description": "An SDK to receive pushed updates from OpenSea over websocket",
   "main": "lib/index.ts",
   "module": "lib/index.ts",
   "repository": "https://github.com/ProjectOpenSea/pushed-updates.git",
-  "author": "Charlie Hulcher",
+  "author": "OpenSea Developers",
   "license": "MIT",
   "files": [
     "lib"
