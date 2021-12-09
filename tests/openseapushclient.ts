@@ -14,8 +14,8 @@ class TestTransport {
   }
 }
 
-suite('SDK', () => {
-  test('should construct', () => {
+suite('OpenSeaPushClientTest', () => {
+  test('OpenSeaPushClientTest constructer', () => {
     const apiToken = 'test';
     const sdk = new OpenSeaPushClient(apiToken, {
       apiUrl: 'ws://localhost:4000',
