@@ -93,7 +93,6 @@ export type Transaction = {
 export type ItemSoldEventPayload = {
   quantity: number;
   listing_type: string;
-  listing_date: string;
   closing_date: string;
   transaction: Transaction;
   maker: Account;
