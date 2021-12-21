@@ -6,7 +6,9 @@ import {
   ItemMetadataUpdate,
   ItemListedEvent,
   ItemSoldEvent,
-  ItemTransferredEvent
+  ItemTransferredEvent,
+  ItemReceivedBidEvent,
+  ItemReceivedOfferEvent
 } from './types';
 
 const ALL = '*';
@@ -56,6 +58,20 @@ export class OpenSeaPushClient {
     callback: (arg: ItemTransferredEvent) => any
   ): void {
     this.subscribe(EventType.ITEM_TRANSFERRED, collection_slug, callback);
+  }
+
+  public subscribeItemReceivedOfferEvents(
+    collection_slug: string = ALL,
+    callback: (arg: ItemReceivedOfferEvent) => any
+  ): void {
+    this.subscribe(EventType.ITEM_RECEIVED_OFFER, collection_slug, callback);
+  }
+
+  public subscribeItemReceivedBidEvents(
+    collection_slug: string = ALL,
+    callback: (arg: ItemReceivedBidEvent) => any
+  ): void {
+    this.subscribe(EventType.ITEM_RECEIVED_BID, collection_slug, callback);
   }
 
   public subscribeAllItemEvents(

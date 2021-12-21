@@ -74,6 +74,16 @@ client.subscribeAllItemEvents('collection-slug', (myEvent) => {
 });
 ```
 
+## Streaming bids and offers  
+```javascript 
+client.subscribeItemReceivedBidEvents('collection-slug', (myEvent) => { 
+  // do something
+})
+client.subscribeItemReceivedOfferEvents('collection-slug', (myEvent) => {
+  // do something
+})
+```
+
 # Subscribing to events from all collections 
 
 If you'd like to listen to an event from all collections use wildcard `*` for the `collection_slug` parameter. 

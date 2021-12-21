@@ -9,7 +9,9 @@ export enum EventType {
   ITEM_METADATA_UPDATED = 'item_metadata_updated',
   ITEM_LISTED = 'item_listed',
   ITEM_SOLD = 'item_sold',
-  ITEM_TRANSFERRED = 'item_transferred'
+  ITEM_TRANSFERRED = 'item_transferred',
+  ITEM_RECEIVED_OFFER = 'item_received_offer',
+  ITEM_RECEIVED_BID = 'item_received_bid'
 }
 
 export type BasePushedUpdateMessage = {
@@ -106,7 +108,7 @@ export interface ItemSoldEvent extends BasePushedUpdateMessage {
 }
 
 export type ItemTransferredEventPayload = {
-  from_acount: Account;
+  from_account: Account;
   quantity: number;
   to_account: Account;
   transaction: Transaction;
@@ -114,4 +116,32 @@ export type ItemTransferredEventPayload = {
 
 export interface ItemTransferredEvent extends BasePushedUpdateMessage {
   payload: ItemTransferredEventPayload;
+}
+
+export type ItemReceivedBidEventPayload = {
+  quantity: number;
+  created_date: string;
+  expiration_date: string;
+  maker: Account;
+  taker: Account;
+  base_price: number;
+  payment_token: PaymentToken;
+};
+
+export interface ItemReceivedBidEvent extends BasePushedUpdateMessage {
+  payload: ItemReceivedBidEventPayload;
+}
+
+export type ItemReceivedOfferEventPayload = {
+  quantity: number;
+  created_date: string;
+  expiration_date: string;
+  maker: Account;
+  taker: Account;
+  base_price: number;
+  payment_token: PaymentToken;
+};
+
+export interface ItemReceivedOfferEvent extends BasePushedUpdateMessage {
+  payload: ItemReceivedOfferEventPayload;
 }
