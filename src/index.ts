@@ -8,8 +8,10 @@ import {
   ItemSoldEvent,
   ItemTransferredEvent,
   ItemReceivedBidEvent,
-  ItemReceivedOfferEvent
+  ItemReceivedOfferEvent,
+  ItemCancelledEvent
 } from './types';
+import { WebSocket } from 'ws';
 
 const ALL = '*';
 
@@ -37,6 +39,13 @@ export class OpenSeaPushClient {
     callback: (arg: ItemMetadataUpdate) => any
   ): void {
     this.subscribe(EventType.ITEM_METADATA_UPDATED, collection_slug, callback);
+  }
+
+  public subscribeItemCancelledEvents(
+    collection_slug: string = ALL,
+    callback: (arg: ItemCancelledEvent) => any
+  ): void {
+    this.subscribe(EventType.ITEM_CANCELLED, collection_slug, callback);
   }
 
   public subscribeItemListedEvents(

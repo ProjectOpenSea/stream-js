@@ -11,7 +11,8 @@ export enum EventType {
   ITEM_SOLD = 'item_sold',
   ITEM_TRANSFERRED = 'item_transferred',
   ITEM_RECEIVED_OFFER = 'item_received_offer',
-  ITEM_RECEIVED_BID = 'item_received_bid'
+  ITEM_RECEIVED_BID = 'item_received_bid',
+  ITEM_CANCELLED = 'item_cancelled'
 }
 
 export type BasePushedUpdateMessage = {
@@ -143,4 +144,15 @@ export type ItemReceivedOfferEventPayload = {
 
 export interface ItemReceivedOfferEvent extends BasePushedUpdateMessage {
   payload: ItemReceivedOfferEventPayload;
+}
+
+export type ItemCancelledEventPayload = {
+  quantity: number;
+  listing_type: string;
+  transaction: Transaction;
+  payment_token: PaymentToken;
+};
+
+export interface ItemCancelledEvent extends BasePushedUpdateMessage {
+  payload: ItemCancelledEventPayload;
 }
