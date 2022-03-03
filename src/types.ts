@@ -3,7 +3,7 @@ import type { SocketConnectOption } from 'phoenix';
 export type ClientConfig = {
   apiUrl: string;
   token: string;
-  connectOptions: Partial<SocketConnectOption>;
+  connectOptions?: Partial<SocketConnectOption>;
   onError?: (error: unknown) => void;
 };
 

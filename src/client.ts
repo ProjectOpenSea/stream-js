@@ -1,4 +1,5 @@
 import { Socket, Channel } from 'phoenix';
+import { collectionTopic } from './helpers';
 import {
   ClientConfig,
   BasePushedUpdateMessage,
@@ -68,7 +69,7 @@ export class OpenSeaPushClient {
   ) => {
     this.socket.connect();
 
-    const topic = `collection:${collectionSlug}`;
+    const topic = collectionTopic(collectionSlug);
     const channel = this.getChannel(topic);
     channel.on(eventType, callback);
     return () => {

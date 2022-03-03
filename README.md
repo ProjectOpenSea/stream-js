@@ -27,10 +27,7 @@ import { WebSocket } from 'ws';
 
 const client = new OpenSeaPushClient({
   apiUrl: 'apiURL',
-  token: 'dummy_token',
-  connectOptions: {
-    transport: WebSocket
-  }
+  token: 'dummy_token'
 });
 ```
 
