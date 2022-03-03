@@ -29,7 +29,7 @@ import { OpenSeaPushClient } from '@opensea/pushed-updates-sdk';
 
 const client = new OpenSeaPushClient({
   apiUrl: 'apiURL',
-  token: 'dummy_token'
+  token: 'dummyToken'
 });
 ```
 
@@ -110,7 +110,7 @@ client.onItemCancelled('collection-slug', (event) => {
 
 # Subscribing to events from all collections
 
-If you'd like to listen to an event from all collections use wildcard `*` for the `collection_slug` parameter.
+If you'd like to listen to an event from all collections use wildcard `*` for the `collectionSlug` parameter.
 
 # Types
 
