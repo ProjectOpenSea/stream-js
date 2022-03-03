@@ -1,4 +1,8 @@
 module.exports = {
+  env: {
+    browser: true,
+    node: true
+  },
   root: true,
   reportUnusedDisableDirectives: true,
   parser: '@typescript-eslint/parser',

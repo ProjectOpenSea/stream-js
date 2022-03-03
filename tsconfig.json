@@ -3,9 +3,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "experimentalDecorators": true,
-    "declaration": true,
-    "outDir": "./lib",
+    "outDir": "./dist",
     "strict": true
   }
 }
