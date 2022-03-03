@@ -1,6 +1,6 @@
 import { EventType, OpenSeaPushClient } from '../src';
 import WS from 'jest-websocket-mock';
-import { getSocket, getChannels, encode } from './helpers';
+import { getSocket, getChannels, encode, mockEvent } from './helpers';
 import { collectionTopic } from '../src/helpers';
 
 let server: WS;
@@ -94,21 +94,7 @@ describe('event streams', () => {
         (event) => onItemListed(event)
       );
 
-      const payload = {
-        chain: {
-          name: 'Ethereum'
-        },
-        collection: {
-          slug: 'bored-ape'
-        },
-        event_type: eventType,
-        item: {
-          contract_address: '0x',
-          token_id: '11'
-        },
-        payload: {},
-        timestamp: Date.now().toString()
-      };
+      const payload = mockEvent(eventType, {});
 
       server.send(
         encode({

@@ -30,3 +30,24 @@ export const encode = ({
 }: ChannelParams) => {
   return JSON.stringify([join_ref, ref, topic, event, payload]);
 };
+
+export const mockEvent = <Payload = unknown>(
+  eventType: EventType,
+  payload: Payload
+): BasePushedUpdateMessage<Payload> => {
+  return {
+    chain: {
+      name: 'Ethereum'
+    },
+    collection: {
+      slug: 'bored-ape'
+    },
+    event_type: eventType,
+    item: {
+      contract_address: '0x',
+      token_id: '11'
+    },
+    payload,
+    timestamp: Date.now().toString()
+  };
+};
