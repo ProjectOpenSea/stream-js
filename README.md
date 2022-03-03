@@ -93,14 +93,6 @@ client.onEvents(
 );
 ```
 
-## Streaming all event types
-
-```javascript
-client.onAllEvents('collection-slug', (myEvent) => {
-  console.log(myEvent);
-});
-```
-
 ## Streaming auction cancellations events
 
 ```javascript

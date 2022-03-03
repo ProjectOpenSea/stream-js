@@ -147,11 +147,4 @@ export class OpenSeaPushClient {
       }
     };
   };
-
-  public onAllEvents = (
-    collectionSlug: string,
-    callback: Callback<BasePushedUpdateMessage<unknown>>
-  ) => {
-    return this.onEvents(collectionSlug, Object.values(EventType), callback);
-  };
 }
