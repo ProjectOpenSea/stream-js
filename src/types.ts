@@ -1,9 +1,10 @@
-import { SocketConnectOption } from 'phoenix';
+import type { SocketConnectOption } from 'phoenix';
 
 export type ClientConfig = {
   apiUrl: string;
   token: string;
-  socketOptions: Partial<SocketConnectOption>;
+  connectOptions: Partial<SocketConnectOption>;
+  onError?: (error: unknown) => void;
 };
 
 export enum EventType {

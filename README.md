@@ -22,12 +22,13 @@ For our beta test users we are only using basic authentication. To get started, 
 ## Start a socket connection
 
 ```javascript
-import { OpenSeaPushClient } from 'opensea-push-client';
+import { OpenSeaPushClient } from '@opensea/pushed-updates';
 import { WebSocket } from 'ws';
 
-const client = new OpenSeaPushClient('dummy_token', {
+const client = new OpenSeaPushClient({
   apiUrl: 'apiURL',
-  socketOptions: {
+  token: 'dummy_token',
+  connectOptions: {
     transport: WebSocket
   }
 });
@@ -38,7 +39,7 @@ After successfully connecting to our websocket it is time to listen to specific 
 ## Streaming metadata updates
 
 ```javascript
-client.subscribeItemMetadataUpdates('collection-slug', (myEvent) => {
+client.onItemMetadataUpdated('collection-slug', (myEvent) => {
   // Your use case
   console.log(myEvent);
 });
@@ -47,7 +48,7 @@ client.subscribeItemMetadataUpdates('collection-slug', (myEvent) => {
 ## Streaming item listed events
 
 ```javascript
-client.subscribeItemListedEvents('collection-slug', (myEvent) => {
+client.onItemListed('collection-slug', (myEvent) => {
   console.log(myEvent);
 });
 ```
@@ -55,7 +56,7 @@ client.subscribeItemListedEvents('collection-slug', (myEvent) => {
 ## Streaming item sold events
 
 ```javascript
-client.subscribeItemSoldEvents('collection-slug', (myEvent) => {
+client.onItemSold('collection-slug', (myEvent) => {
   console.log(myEvent);
 });
 ```
@@ -63,15 +64,7 @@ client.subscribeItemSoldEvents('collection-slug', (myEvent) => {
 ## Streaming item transferred events
 
 ```javascript
-client.subscribeItemTransferredEvents('collection-slug', (myEvent) => {
-  console.log(myEvent);
-});
-```
-
-## Streaming all item events
-
-```javascript
-client.subscribeAllItemEvents('collection-slug', (myEvent) => {
+client.onItemTransferred('collection-slug', (myEvent) => {
   console.log(myEvent);
 });
 ```
@@ -79,18 +72,39 @@ client.subscribeAllItemEvents('collection-slug', (myEvent) => {
 ## Streaming bids and offers
 
 ```javascript
-client.subscribeItemReceivedBidEvents('collection-slug', (myEvent) => {
+client.onItemReceivedBid('collection-slug', (myEvent) => {
   // do something
 });
-client.subscribeItemReceivedOfferEvents('collection-slug', (myEvent) => {
+
+client.onItemReceivedOffer('collection-slug', (myEvent) => {
   // do something
+});
+```
+
+## Streaming multiple event types
+
+```javascript
+client.onEvents(
+  'collection-slug',
+  [EventType.ITEM_RECEIVED_OFFER, EventType.ITEM_TRANSFERRED],
+  (myEvent) => {
+    console.log(myEvent);
+  }
+);
+```
+
+## Streaming all event types
+
+```javascript
+client.onAllEvents('collection-slug', (myEvent) => {
+  console.log(myEvent);
 });
 ```
 
 ## Streaming auction cancellations events
 
 ```javascript
-client.subscribeItemCancelledEvents('collection-slug', (myEvent) => {
+client.onItemCancelled('collection-slug', (myEvent) => {
   // do something
 });
 ```
@@ -102,3 +116,21 @@ If you'd like to listen to an event from all collections use wildcard `*` for th
 # Types
 
 Types are included to work with our event payload objects easier.
+
+# Disconnecting
+
+## From a specific stream
+
+All subscription methods return a callback function that will unsubscribe from a stream when invoked.
+
+```javascript
+const unsubscribe = client.onItemMetadataUpdated('collection-slug', noop);
+
+unsubscribe();
+```
+
+## From the socket
+
+```javascript
+client.disconnect();
+```
