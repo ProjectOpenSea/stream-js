@@ -19,7 +19,7 @@
     "prepare": "husky install",
     "test": "jest",
     "prettier:check": "prettier --check .",
-    "prettier:check:package.json": "npm run prettier-package-json --list-different",
+    "prettier:check:package.json": "prettier-package-json --list-different",
     "prettier:fix": "prettier --write ."
   },
   "sideEffects": false,
