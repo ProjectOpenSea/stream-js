@@ -35,6 +35,7 @@ export class OpenSeaPushClient {
       return channel;
     }
     channel = this.socket.channel(topic);
+    console.log('CHANNEL', topic);
     channel
       .join()
       .receive('ok', () =>
