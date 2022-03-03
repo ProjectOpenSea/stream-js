@@ -4,7 +4,7 @@
   "description": "An SDK to receive pushed updates from OpenSea over websocket",
   "license": "MIT",
   "author": "OpenSea Developers",
-  "repository": "https://github.com/ProjectOpenSea/pushed-updates.git",
+  "repository": "https://github.com/ProjectOpenSea/pushed-updates-sdk",
   "main": "./dist/index.cjs",
   "module": "./dist/index.module.js",
   "files": [
