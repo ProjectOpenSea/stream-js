@@ -47,45 +47,44 @@ After successfully connecting to our websocket it is time to listen to specific 
 ## Streaming metadata updates
 
 ```javascript
-client.onItemMetadataUpdated('collection-slug', (myEvent) => {
-  // Your use case
-  console.log(myEvent);
+client.onItemMetadataUpdated('collection-slug', (event) => {
+  // handle event
 });
 ```
 
 ## Streaming item listed events
 
 ```javascript
-client.onItemListed('collection-slug', (myEvent) => {
-  console.log(myEvent);
+client.onItemListed('collection-slug', (event) => {
+  // handle event
 });
 ```
 
 ## Streaming item sold events
 
 ```javascript
-client.onItemSold('collection-slug', (myEvent) => {
-  console.log(myEvent);
+client.onItemSold('collection-slug', (event) => {
+  // handle event
 });
 ```
 
 ## Streaming item transferred events
 
 ```javascript
-client.onItemTransferred('collection-slug', (myEvent) => {
-  console.log(myEvent);
+client.onItemTransferred('collection-slug', (event) => {
+  // handle event
 });
 ```
 
 ## Streaming bids and offers
 
 ```javascript
-client.onItemReceivedBid('collection-slug', (myEvent) => {
-  // do something
+client.onItemReceivedBid('collection-slug', (event) => {
+  // handle event
 });
 
-client.onItemReceivedOffer('collection-slug', (myEvent) => {
-  // do something
+client.onItemReceivedOffer('collection-slug', (event) => {
+  // handle event
 });
 ```
 
@@ -95,8 +94,8 @@ client.onItemReceivedOffer('collection-slug', (myEvent) => {
 client.onEvents(
   'collection-slug',
   [EventType.ITEM_RECEIVED_OFFER, EventType.ITEM_TRANSFERRED],
-  (myEvent) => {
-    console.log(myEvent);
+  (event) => {
+    // handle event
   }
 );
 ```
@@ -104,8 +103,8 @@ client.onEvents(
 ## Streaming auction cancellations events
 
 ```javascript
-client.onItemCancelled('collection-slug', (myEvent) => {
-  // do something
+client.onItemCancelled('collection-slug', (event) => {
+  // handle event
 });
 ```
 
