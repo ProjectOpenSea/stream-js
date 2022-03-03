@@ -37,12 +37,6 @@ jobs:
       - name: Run tests
         run: npm run test -- --coverage --ci --runInBand
 
-      - uses: coverallsapp/github-action@1.1.3
-        env:
-          NODE_COVERALLS_DEBUG: 1
-        with:
-          github-token: ${{ secrets.GH_PAT_TOKEN }}
-
   build:
     runs-on: ubuntu-latest
     steps:
