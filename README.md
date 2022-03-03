@@ -1,5 +1,8 @@
 # OpenSea Push Client
 
+[![https://badges.frapsoft.com/os/mit/mit.svg?v=102](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://opensource.org/licenses/MIT)
+[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+
 A Javascript SDK for receiving updates from OpenSea pushed over websocket. We currently support the following event types for collections:
 
 - item listed
@@ -23,7 +26,6 @@ For our beta test users we are only using basic authentication. To get started, 
 
 ```javascript
 import { OpenSeaPushClient } from '@opensea/pushed-updates-sdk';
-import { WebSocket } from 'ws';
 
 const client = new OpenSeaPushClient({
   apiUrl: 'apiURL',
