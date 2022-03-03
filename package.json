@@ -1,6 +1,6 @@
 {
   "name": "opensea-push-client",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "An SDK to receive pushed updates from OpenSea over websocket",
   "license": "MIT",
   "author": "OpenSea Developers",
