@@ -1,6 +1,9 @@
 ---
 name: code-quality
 on:
+  push:
+    branches:
+      - master
   pull_request:
 
 env:
