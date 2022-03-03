@@ -1,6 +1,6 @@
 import { Socket, Channel } from 'phoenix';
 import {
-  ApiConfig,
+  ClientConfig,
   BasePushedUpdateMessage,
   EventType,
   ItemMetadataUpdate,
@@ -9,115 +9,149 @@ import {
   ItemTransferredEvent,
   ItemReceivedBidEvent,
   ItemReceivedOfferEvent,
-  ItemCancelledEvent
+  ItemCancelledEvent,
+  Callback
 } from './types';
-import { WebSocket } from 'ws';
-
-const ALL = '*';
 
 export class OpenSeaPushClient {
   private socket: Socket;
   private channels: Map<string, Channel>;
 
-  constructor(apiToken: string, { apiUrl, socketOptions }: ApiConfig) {
-    const opts = {
+  constructor({ socketOptions, token, apiUrl }: ClientConfig) {
+    this.socket = new Socket(apiUrl, {
       params: {
-        token: apiToken
+        token
       },
       ...socketOptions
-    };
-    this.socket = new Socket(apiUrl, opts);
-    this.socket.onError((e) => {
-      console.log(e);
     });
+    this.socket.onError((e) => console.log('Socket error', e));
     this.socket.connect();
     this.channels = new Map<string, Channel>();
   }
 
-  public subscribeItemMetadataUpdates(
-    collection_slug: string = ALL,
-    callback: (arg: ItemMetadataUpdate) => any
-  ): void {
-    this.subscribe(EventType.ITEM_METADATA_UPDATED, collection_slug, callback);
-  }
-
-  public subscribeItemCancelledEvents(
-    collection_slug: string = ALL,
-    callback: (arg: ItemCancelledEvent) => any
-  ): void {
-    this.subscribe(EventType.ITEM_CANCELLED, collection_slug, callback);
-  }
-
-  public subscribeItemListedEvents(
-    collection_slug: string = ALL,
-    callback: (arg: ItemListedEvent) => any
-  ): void {
-    this.subscribe(EventType.ITEM_LISTED, collection_slug, callback);
-  }
-
-  public subscribeItemSoldEvents(
-    collection_slug: string = ALL,
-    callback: (arg: ItemSoldEvent) => any
-  ): void {
-    this.subscribe(EventType.ITEM_SOLD, collection_slug, callback);
-  }
-
-  public subscribeItemTransferredEvents(
-    collection_slug: string = ALL,
-    callback: (arg: ItemTransferredEvent) => any
-  ): void {
-    this.subscribe(EventType.ITEM_TRANSFERRED, collection_slug, callback);
-  }
-
-  public subscribeItemReceivedOfferEvents(
-    collection_slug: string = ALL,
-    callback: (arg: ItemReceivedOfferEvent) => any
-  ): void {
-    this.subscribe(EventType.ITEM_RECEIVED_OFFER, collection_slug, callback);
-  }
-
-  public subscribeItemReceivedBidEvents(
-    collection_slug: string = ALL,
-    callback: (arg: ItemReceivedBidEvent) => any
-  ): void {
-    this.subscribe(EventType.ITEM_RECEIVED_BID, collection_slug, callback);
-  }
-
-  public subscribeAllItemEvents(
-    collection_slug: string = ALL,
-    callback: (arg: BasePushedUpdateMessage) => any
-  ): void {
-    this.subscribeItemListedEvents(collection_slug, callback);
-    this.subscribeItemSoldEvents(collection_slug, callback);
-    this.subscribeItemTransferredEvents(collection_slug, callback);
-    this.subscribeItemMetadataUpdates(collection_slug, callback);
-  }
-
-  private subscribe(
-    event_type: EventType,
-    collection_slug: string,
-    callback: (arg0: BasePushedUpdateMessage) => any
-  ): void {
-    const topic = 'collection:' + collection_slug;
-    const channel = this.getChannel(topic);
-    channel.on(event_type, callback);
-  }
-
-  private getChannel(topic: string): Channel {
+  private getChannel = (topic: string): Channel => {
     let channel = this.channels.get(topic);
-    if (channel != undefined) {
+    if (channel) {
       return channel;
     }
     channel = this.socket.channel(topic);
     channel
       .join()
-      .receive('ok', ({ messages }) =>
-        console.log('Successfully joined channel', messages || '')
+      .receive('ok', () =>
+        console.log(`Successfully joined channel "${topic}"`)
       )
-      .receive('error', ({ reason }) =>
-        console.error('Failed to join channel', reason)
+      .receive('error', () =>
+        console.error(`Failed to join channel "${topic}"`)
       );
+
     this.channels.set(topic, channel);
     return channel;
-  }
+  };
+
+  private subscribe = <Payload, Event extends BasePushedUpdateMessage<Payload>>(
+    eventType: EventType,
+    collectionSlug: string,
+    callback: Callback<Event>
+  ) => {
+    const topic = `collection:${collectionSlug}`;
+    const channel = this.getChannel(topic);
+    channel.on(eventType, callback);
+    return () => {
+      channel
+        .leave()
+        .receive('ok', () =>
+          console.log(
+            `Succesfully left channel "${topic}" listening for ${eventType}`
+          )
+        );
+    };
+  };
+
+  public subscribeItemMetadataUpdates = (
+    collectionSlug: string,
+    callback: Callback<ItemMetadataUpdate>
+  ) => {
+    return this.subscribe(
+      EventType.ITEM_METADATA_UPDATED,
+      collectionSlug,
+      callback
+    );
+  };
+
+  public subscribeItemCancelledEvents = (
+    collectionSlug: string,
+    callback: Callback<ItemCancelledEvent>
+  ) => {
+    return this.subscribe(EventType.ITEM_CANCELLED, collectionSlug, callback);
+  };
+
+  public subscribeItemListedEvents = (
+    collectionSlug: string,
+    callback: Callback<ItemListedEvent>
+  ) => {
+    return this.subscribe(EventType.ITEM_LISTED, collectionSlug, callback);
+  };
+
+  public subscribeItemSoldEvents = (
+    collectionSlug: string,
+    callback: Callback<ItemSoldEvent>
+  ) => {
+    return this.subscribe(EventType.ITEM_SOLD, collectionSlug, callback);
+  };
+
+  public subscribeItemTransferredEvents = (
+    collectionSlug: string,
+    callback: Callback<ItemTransferredEvent>
+  ) => {
+    return this.subscribe(EventType.ITEM_TRANSFERRED, collectionSlug, callback);
+  };
+
+  public subscribeItemReceivedOfferEvents = (
+    collectionSlug: string,
+    callback: Callback<ItemReceivedOfferEvent>
+  ) => {
+    return this.subscribe(
+      EventType.ITEM_RECEIVED_OFFER,
+      collectionSlug,
+      callback
+    );
+  };
+
+  public subscribeItemReceivedBidEvents = (
+    collectionSlug: string,
+    callback: Callback<ItemReceivedBidEvent>
+  ) => {
+    return this.subscribe(
+      EventType.ITEM_RECEIVED_BID,
+      collectionSlug,
+      callback
+    );
+  };
+
+  public subscribeToEvents = (
+    collectionSlug: string,
+    eventTypes: EventType[],
+    callback: Callback<BasePushedUpdateMessage<unknown>>
+  ) => {
+    const subscriptions = eventTypes.map((eventType) =>
+      this.subscribe(eventType, collectionSlug, callback)
+    );
+
+    return () => {
+      for (const unsubscribe of subscriptions) {
+        unsubscribe();
+      }
+    };
+  };
+
+  public subscribeToAllEvents = (
+    collectionSlug: string,
+    callback: Callback<BasePushedUpdateMessage<unknown>>
+  ) => {
+    return this.subscribeToEvents(
+      collectionSlug,
+      Object.values(EventType),
+      callback
+    );
+  };
 }
