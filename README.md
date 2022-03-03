@@ -19,7 +19,7 @@ And then `npm install`
 
 For our beta test users we are only using basic authentication. To get started, request the basic authentication token and base endpoint from us. Later on we will align authentication with our API.
 
-## Start a socket connection
+## Create a client
 
 ```javascript
 import { OpenSeaPushClient } from '@opensea/pushed-updates';
@@ -29,6 +29,15 @@ const client = new OpenSeaPushClient({
   apiUrl: 'apiURL',
   token: 'dummy_token'
 });
+```
+
+## Manually connecting to the socket (optional)
+
+Client will automatically connect to the socket as soon as you subscribe to the first channel.
+If you would like to connect to the socket manually (before that), you can do so:
+
+```javascript
+client.connect();
 ```
 
 After successfully connecting to our websocket it is time to listen to specific events you're interested in!

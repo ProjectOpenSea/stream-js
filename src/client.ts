@@ -32,6 +32,10 @@ export class OpenSeaPushClient {
     this.channels = new Map<string, Channel>();
   }
 
+  public connect = () => {
+    this.socket.connect();
+  };
+
   public disconnect = (
     callback = () => console.log(`Succesfully disconnected from socket`)
   ) => {
