@@ -22,7 +22,7 @@ For our beta test users we are only using basic authentication. To get started, 
 ## Create a client
 
 ```javascript
-import { OpenSeaPushClient } from '@opensea/pushed-updates';
+import { OpenSeaPushClient } from '@opensea/pushed-updates-sdk';
 import { WebSocket } from 'ws';
 
 const client = new OpenSeaPushClient({
