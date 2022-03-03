@@ -32,9 +32,7 @@ export class OpenSeaPushClient {
   }
 
   public disconnect = (
-    callback = () => {
-      console.log(`Succesfully disconnected from socket`);
-    }
+    callback = () => console.log(`Succesfully disconnected from socket`)
   ) => {
     this.channels.clear();
     return this.socket.disconnect(callback);
