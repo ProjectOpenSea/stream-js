@@ -1,8 +1,10 @@
-import { SocketConnectOption } from 'phoenix';
+import type { SocketConnectOption } from 'phoenix';
 
-export type ApiConfig = {
+export type ClientConfig = {
   apiUrl: string;
-  socketOptions: Partial<SocketConnectOption>;
+  token: string;
+  connectOptions?: Partial<SocketConnectOption>;
+  onError?: (error: unknown) => void;
 };
 
 export enum EventType {
@@ -15,7 +17,7 @@ export enum EventType {
   ITEM_CANCELLED = 'item_cancelled'
 }
 
-export type BasePushedUpdateMessage = {
+export type BasePushedUpdateMessage<Payload> = {
   item: {
     token_id: string;
     contract_address: string;
@@ -28,7 +30,7 @@ export type BasePushedUpdateMessage = {
   };
   event_type: string;
   timestamp: string;
-  payload: any;
+  payload: Payload;
 };
 
 export type Trait = {
@@ -53,9 +55,8 @@ export type ItemMetadataUpdatePayload = {
   metadata_url: string;
   traits: [Trait];
 };
-export interface ItemMetadataUpdate extends BasePushedUpdateMessage {
-  payload: ItemMetadataUpdatePayload;
-}
+export type ItemMetadataUpdate =
+  BasePushedUpdateMessage<ItemMetadataUpdatePayload>;
 
 export type Account = {
   address: string;
@@ -82,9 +83,7 @@ export type ItemListedEventPayload = {
   is_private: boolean;
 };
 
-export interface ItemListedEvent extends BasePushedUpdateMessage {
-  payload: ItemListedEventPayload;
-}
+export type ItemListedEvent = BasePushedUpdateMessage<ItemListedEventPayload>;
 
 export type Transaction = {
   hash: string;
@@ -103,9 +102,7 @@ export type ItemSoldEventPayload = {
   is_private: boolean;
 };
 
-export interface ItemSoldEvent extends BasePushedUpdateMessage {
-  payload: ItemSoldEventPayload;
-}
+export type ItemSoldEvent = BasePushedUpdateMessage<ItemSoldEventPayload>;
 
 export type ItemTransferredEventPayload = {
   from_account: Account;
@@ -114,9 +111,8 @@ export type ItemTransferredEventPayload = {
   transaction: Transaction;
 };
 
-export interface ItemTransferredEvent extends BasePushedUpdateMessage {
-  payload: ItemTransferredEventPayload;
-}
+export type ItemTransferredEvent =
+  BasePushedUpdateMessage<ItemTransferredEventPayload>;
 
 export type ItemReceivedBidEventPayload = {
   quantity: number;
@@ -128,9 +124,8 @@ export type ItemReceivedBidEventPayload = {
   payment_token: PaymentToken;
 };
 
-export interface ItemReceivedBidEvent extends BasePushedUpdateMessage {
-  payload: ItemReceivedBidEventPayload;
-}
+export type ItemReceivedBidEvent =
+  BasePushedUpdateMessage<ItemReceivedBidEventPayload>;
 
 export type ItemReceivedOfferEventPayload = {
   quantity: number;
@@ -142,9 +137,8 @@ export type ItemReceivedOfferEventPayload = {
   payment_token: PaymentToken;
 };
 
-export interface ItemReceivedOfferEvent extends BasePushedUpdateMessage {
-  payload: ItemReceivedOfferEventPayload;
-}
+export type ItemReceivedOfferEvent =
+  BasePushedUpdateMessage<ItemReceivedOfferEventPayload>;
 
 export type ItemCancelledEventPayload = {
   quantity: number;
@@ -153,6 +147,7 @@ export type ItemCancelledEventPayload = {
   payment_token: PaymentToken;
 };
 
-export interface ItemCancelledEvent extends BasePushedUpdateMessage {
-  payload: ItemCancelledEventPayload;
-}
+export type ItemCancelledEvent =
+  BasePushedUpdateMessage<ItemCancelledEventPayload>;
+
+export type Callback<Event> = (event: Event) => unknown;

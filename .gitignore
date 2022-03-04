@@ -1,5 +1,5 @@
 node_modules
-
+dist
 coverage
 
 # Logs
@@ -18,4 +18,4 @@ yarn-error.log*
 # Yarn Integrity file
 .yarn-integrity
 
-.nyc_output
+

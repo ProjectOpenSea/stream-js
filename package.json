@@ -1,53 +1,69 @@
 {
-  "name": "opensea-push-client",
-  "version": "1.0.0",
+  "name": "@opensea/pushed-updates-sdk",
+  "version": "0.0.1",
   "description": "An SDK to receive pushed updates from OpenSea over websocket",
-  "main": "lib/index.ts",
-  "module": "lib/index.ts",
-  "repository": "https://github.com/ProjectOpenSea/pushed-updates.git",
-  "author": "OpenSea Developers",
   "license": "MIT",
+  "author": "OpenSea Developers",
+  "repository": "https://github.com/ProjectOpenSea/pushed-updates-sdk",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.module.js",
   "files": [
-    "lib"
+    "dist"
   ],
   "scripts": {
-    "test": "nyc ./node_modules/.bin/_mocha --require jsdom-global/register 'tests/**/*.ts'",
-    "_test": "mocha tests/**/*.ts --require jsdom-global/register --require ts-node/register --timeout 15000",
-    "prebuild": "npm run lint",
-    "build": "tsc",
-    "prewatch": "npm run lint",
-    "watch": "tsc --watch",
-    "lint": "eslint . --ext .ts",
-    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' 'tests/**/*.ts' --write",
-    "prettier-check": "prettier --check --config .prettierrc 'src/**/*.ts' 'tests/**/*.ts'",
-    "commit-check": "npm run lint && npm run prettier-check && npm run test"
+    "build": "microbundle",
+    "check-types": "tsc --noEmit",
+    "dev": "microbundle watch",
+    "eslint": "eslint . --max-warnings 0 --ext .js,.ts --fix",
+    "lint:check": "concurrently \"npm run check-types\" \"npm run eslint\" \"yarn prettier:check\" \"npm run prettier:check:package.json\"",
+    "prepare": "husky install",
+    "test": "jest",
+    "prettier:check": "prettier --check .",
+    "prettier:check:package.json": "prettier-package-json --list-different",
+    "prettier:fix": "prettier --write ."
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "phoenix": "^1.6.2",
+    "ws": "^8.3.0"
   },
   "devDependencies": {
-    "@istanbuljs/nyc-config-typescript": "^1.0.1",
-    "@types/chai": "^4.2.22",
-    "@types/mocha": "^9.0.0",
+    "@types/jest": "^27.4.1",
     "@types/phoenix": "^1.5.3",
     "@types/sinon": "^10.0.6",
     "@types/ws": "^8.2.1",
     "@typescript-eslint/eslint-plugin": "^5.3.0",
     "@typescript-eslint/parser": "^5.3.0",
-    "chai": "^4.3.4",
+    "concurrently": "^7.0.0",
     "eslint": "^8.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "jsdom": "^18.0.1",
-    "jsdom-global": "^3.0.2",
-    "mocha": "^9.1.3",
-    "mocha-typescript": "^1.1.17",
-    "mock-socket": "^9.0.7",
-    "nyc": "^15.1.0",
+    "husky": "^7.0.4",
+    "jest": "^27.5.1",
+    "jest-websocket-mock": "^2.3.0",
+    "lint-staged": "^12.3.4",
+    "microbundle": "^0.14.2",
     "prettier": "^2.4.1",
-    "sinon": "^12.0.0",
+    "prettier-package-json": "^2.6.3",
+    "ts-jest": "^27.1.3",
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4"
   },
-  "dependencies": {
-    "phoenix": "^1.6.2",
-    "ws": "^8.3.0"
-  }
+  "exports": {
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.modern.js"
+  },
+  "lint-staged": {
+    "package.json": [
+      "prettier-package-json --write"
+    ],
+    "**/*.{ts,tsx,js,jsx,html,md,mdx,yml,json}": [
+      "prettier --write"
+    ],
+    "**/*.{ts,tsx,js,jsx}": [
+      "eslint --cache --fix"
+    ]
+  },
+  "source": "src/index.ts",
+  "unpkg": "./dist/index.umd.js"
 }
