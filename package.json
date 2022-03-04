@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "@types/jest": "27.4.1",
-    "@types/phoenix": "1.5.3",
+    "@types/phoenix": "1.5.4",
     "@types/sinon": "10.0.6",
     "@types/ws": "8.2.2",
     "@typescript-eslint/eslint-plugin": "5.3.0",
