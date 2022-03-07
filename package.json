@@ -24,8 +24,7 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "phoenix": "^1.6.2",
-    "ws": "^8.3.0"
+    "phoenix": "^1.6.2"
   },
   "devDependencies": {
     "@types/jest": "27.4.1",
