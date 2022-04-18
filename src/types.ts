@@ -22,6 +22,12 @@ export type BasePushedUpdateMessage<Payload> = {
     token_id: string;
     contract_address: string;
   };
+  item_metadata: {
+    name: string;
+    image_url: string;
+    animation_url: string;
+    metadata_url: string;
+  };
   collection: {
     slug: string;
   };
