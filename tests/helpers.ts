@@ -47,6 +47,12 @@ export const mockEvent = <Payload = unknown>(
       contract_address: '0x',
       token_id: '11'
     },
+    item_metadata: {
+      name: 'Bored Ape #11',
+      image_url: 'https://example.com/image.png',
+      animation_url: 'https://example.com/image.png',
+      metadata_url: 'https://example.com/image.png'
+    },
     payload,
     timestamp: Date.now().toString()
   };

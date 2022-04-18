@@ -1,10 +1,10 @@
 {
-  "name": "@opensea/pushed-updates-sdk",
+  "name": "@opensea/opensea-stream-js-sdk",
   "version": "0.0.1",
   "description": "An SDK to receive pushed updates from OpenSea over websocket",
   "license": "MIT",
   "author": "OpenSea Developers",
-  "repository": "https://github.com/ProjectOpenSea/pushed-updates-sdk",
+  "repository": "https://github.com/ProjectOpenSea/opensea-stream-js-sdk",
   "main": "./dist/index.cjs",
   "module": "./dist/index.module.js",
   "files": [

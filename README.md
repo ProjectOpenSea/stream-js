@@ -27,7 +27,7 @@ For our beta test users we are only using basic authentication using the same AP
 ## Create a client
 
 ```javascript
-import { OpenSeaPushClient } from '@opensea/pushed-updates-sdk';
+import { OpenSeaPushClient } from '@opensea/opensea-stream-js-sdk';
 
 const client = new OpenSeaPushClient({
   apiUrl: 'apiURL',
@@ -50,7 +50,7 @@ After successfully connecting to our websocket it is time to listen to specific 
 
 ## Streaming metadata updates
 
-We will only send out metadata updates when we detect that the metadata provided in `tokenURI` has changed from what OpenSea has previously cached. 
+We will only send out metadata updates when we detect that the metadata provided in `tokenURI` has changed from what OpenSea has previously cached.
 
 ```javascript
 client.onItemMetadataUpdated('collection-slug', (event) => {
