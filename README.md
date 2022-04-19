@@ -120,7 +120,7 @@ If you'd like to listen to an event from all collections use wildcard `*` for th
 
 # Types
 
-Types are included to working with our event payload objects easier.
+Types are included to make working with our event payload objects easier.
 
 # Disconnecting
 
