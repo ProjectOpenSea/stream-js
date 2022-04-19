@@ -5,6 +5,7 @@ export type ClientConfig = {
   token: string;
   connectOptions?: Partial<SocketConnectOption>;
   onError?: (error: unknown) => void;
+  logLevel?: LogLevel;
 };
 
 export enum EventType {
@@ -155,3 +156,11 @@ export type ItemCancelledEventPayload = {
 export type ItemCancelledEvent = BaseStreamMessage<ItemCancelledEventPayload>;
 
 export type Callback<Event> = (event: Event) => unknown;
+
+export enum LogLevel {
+  NOTSET = 0,
+  ERROR = 1,
+  WARN = 2,
+  INFO = 3,
+  DEBUG = 4
+}
