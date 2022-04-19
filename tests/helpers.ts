@@ -1,13 +1,13 @@
 import type { Channel, Socket } from 'phoenix';
-import { BasePushedUpdateMessage, EventType, OpenSeaPushClient } from '../src';
+import { BaseStreamMessage, EventType, OpenSeaStreamClient } from '../src';
 
-export const getSocket = (client: OpenSeaPushClient): Socket => {
+export const getSocket = (client: OpenSeaStreamClient): Socket => {
   // @ts-expect-error private access
   return client.socket;
 };
 
 export const getChannels = (
-  client: OpenSeaPushClient
+  client: OpenSeaStreamClient
 ): Map<string, Channel> => {
   // @ts-expect-error private access
   return client.channels;
@@ -18,7 +18,7 @@ type ChannelParams<Payload = unknown> = {
   ref?: string;
   topic: string;
   event: EventType;
-  payload: BasePushedUpdateMessage<Payload>;
+  payload: BaseStreamMessage<Payload>;
 };
 
 export const encode = ({
@@ -34,7 +34,7 @@ export const encode = ({
 export const mockEvent = <Payload = unknown>(
   eventType: EventType,
   payload: Payload
-): BasePushedUpdateMessage<Payload> => {
+): BaseStreamMessage<Payload> => {
   return {
     chain: {
       name: 'Ethereum'

@@ -2,7 +2,7 @@ import { Socket, Channel } from 'phoenix';
 import { collectionTopic } from './helpers';
 import {
   ClientConfig,
-  BasePushedUpdateMessage,
+  BaseStreamMessage,
   EventType,
   ItemMetadataUpdate,
   ItemListedEvent,
@@ -14,7 +14,7 @@ import {
   Callback
 } from './types';
 
-export class OpenSeaPushClient {
+export class OpenSeaStreamClient {
   private socket: Socket;
   private channels: Map<string, Channel>;
 
@@ -66,7 +66,7 @@ export class OpenSeaPushClient {
     return channel;
   };
 
-  private on = <Payload, Event extends BasePushedUpdateMessage<Payload>>(
+  private on = <Payload, Event extends BaseStreamMessage<Payload>>(
     eventType: EventType,
     collectionSlug: string,
     callback: Callback<Event>
@@ -138,7 +138,7 @@ export class OpenSeaPushClient {
   public onEvents = (
     collectionSlug: string,
     eventTypes: EventType[],
-    callback: Callback<BasePushedUpdateMessage<unknown>>
+    callback: Callback<BaseStreamMessage<unknown>>
   ) => {
     const subscriptions = eventTypes.map((eventType) =>
       this.on(eventType, collectionSlug, callback)

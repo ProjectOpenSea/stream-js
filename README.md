@@ -27,9 +27,9 @@ For our beta test users we are only using basic authentication using the same AP
 ## Create a client
 
 ```javascript
-import { OpenSeaPushClient } from '@opensea/opensea-stream-js-sdk';
+import { OpenSeaStreamClient } from '@opensea/opensea-stream-js-sdk';
 
-const client = new OpenSeaPushClient({
+const client = new OpenSeaStreamClient({
   apiUrl: 'apiURL',
   token: 'dummyToken'
 });

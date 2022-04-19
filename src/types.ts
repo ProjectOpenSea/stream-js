@@ -17,7 +17,7 @@ export enum EventType {
   ITEM_CANCELLED = 'item_cancelled'
 }
 
-export type BasePushedUpdateMessage<Payload> = {
+export type BaseStreamMessage<Payload> = {
   item: {
     token_id: string;
     contract_address: string;
@@ -61,8 +61,7 @@ export type ItemMetadataUpdatePayload = {
   metadata_url: string;
   traits: [Trait];
 };
-export type ItemMetadataUpdate =
-  BasePushedUpdateMessage<ItemMetadataUpdatePayload>;
+export type ItemMetadataUpdate = BaseStreamMessage<ItemMetadataUpdatePayload>;
 
 export type Account = {
   address: string;
@@ -89,7 +88,7 @@ export type ItemListedEventPayload = {
   is_private: boolean;
 };
 
-export type ItemListedEvent = BasePushedUpdateMessage<ItemListedEventPayload>;
+export type ItemListedEvent = BaseStreamMessage<ItemListedEventPayload>;
 
 export type Transaction = {
   hash: string;
@@ -108,7 +107,7 @@ export type ItemSoldEventPayload = {
   is_private: boolean;
 };
 
-export type ItemSoldEvent = BasePushedUpdateMessage<ItemSoldEventPayload>;
+export type ItemSoldEvent = BaseStreamMessage<ItemSoldEventPayload>;
 
 export type ItemTransferredEventPayload = {
   from_account: Account;
@@ -118,7 +117,7 @@ export type ItemTransferredEventPayload = {
 };
 
 export type ItemTransferredEvent =
-  BasePushedUpdateMessage<ItemTransferredEventPayload>;
+  BaseStreamMessage<ItemTransferredEventPayload>;
 
 export type ItemReceivedBidEventPayload = {
   quantity: number;
@@ -131,7 +130,7 @@ export type ItemReceivedBidEventPayload = {
 };
 
 export type ItemReceivedBidEvent =
-  BasePushedUpdateMessage<ItemReceivedBidEventPayload>;
+  BaseStreamMessage<ItemReceivedBidEventPayload>;
 
 export type ItemReceivedOfferEventPayload = {
   quantity: number;
@@ -144,7 +143,7 @@ export type ItemReceivedOfferEventPayload = {
 };
 
 export type ItemReceivedOfferEvent =
-  BasePushedUpdateMessage<ItemReceivedOfferEventPayload>;
+  BaseStreamMessage<ItemReceivedOfferEventPayload>;
 
 export type ItemCancelledEventPayload = {
   quantity: number;
@@ -153,7 +152,6 @@ export type ItemCancelledEventPayload = {
   payment_token: PaymentToken;
 };
 
-export type ItemCancelledEvent =
-  BasePushedUpdateMessage<ItemCancelledEventPayload>;
+export type ItemCancelledEvent = BaseStreamMessage<ItemCancelledEventPayload>;
 
 export type Callback<Event> = (event: Event) => unknown;
