@@ -11,18 +11,21 @@ import {
   ItemReceivedBidEvent,
   ItemReceivedOfferEvent,
   ItemCancelledEvent,
-  Callback
+  Callback,
+  LogLevel
 } from './types';
 
 export class OpenSeaStreamClient {
   private socket: Socket;
   private channels: Map<string, Channel>;
+  private logLevel: LogLevel;
 
   constructor({
     token,
     apiUrl,
     connectOptions,
-    onError = (error) => console.error('Socket error', error)
+    logLevel = LogLevel.INFO,
+    onError = (error) => this.error(error)
   }: ClientConfig) {
     this.socket = new Socket(apiUrl, {
       params: { token },
@@ -30,14 +33,40 @@ export class OpenSeaStreamClient {
     });
     this.socket.onError(onError);
     this.channels = new Map<string, Channel>();
+    this.logLevel = logLevel;
+  }
+
+  private debug(message: unknown) {
+    if (this.logLevel <= LogLevel.DEBUG) {
+      console.debug(message);
+    }
+  }
+
+  private info(message: unknown) {
+    if (this.logLevel <= LogLevel.INFO) {
+      console.info(message);
+    }
+  }
+
+  private warn(message: unknown) {
+    if (this.logLevel <= LogLevel.WARN) {
+      console.warn(message);
+    }
+  }
+
+  private error(message: unknown) {
+    if (this.logLevel <= LogLevel.ERROR) {
+      console.error(message);
+    }
   }
 
   public connect = () => {
+    this.debug('Connecting to socket');
     this.socket.connect();
   };
 
   public disconnect = (
-    callback = () => console.log(`Succesfully disconnected from socket`)
+    callback = () => this.info(`Succesfully disconnected from socket`)
   ) => {
     this.channels.clear();
     return this.socket.disconnect(callback);
@@ -47,12 +76,8 @@ export class OpenSeaStreamClient {
     const channel = this.socket.channel(topic);
     channel
       .join()
-      .receive('ok', () =>
-        console.log(`Successfully joined channel "${topic}"`)
-      )
-      .receive('error', () =>
-        console.error(`Failed to join channel "${topic}"`)
-      );
+      .receive('ok', () => this.info(`Successfully joined channel "${topic}"`))
+      .receive('error', () => this.error(`Failed to join channel "${topic}"`));
 
     this.channels.set(topic, channel);
     return channel;
@@ -79,7 +104,7 @@ export class OpenSeaStreamClient {
     return () => {
       channel.leave().receive('ok', () => {
         this.channels.delete(topic);
-        console.log(
+        this.info(
           `Succesfully left channel "${topic}" listening for ${eventType}`
         );
       });
@@ -90,6 +115,7 @@ export class OpenSeaStreamClient {
     collectionSlug: string,
     callback: Callback<ItemMetadataUpdate>
   ) => {
+    this.debug(`Listening for item metadata updates on "${collectionSlug}"`);
     return this.on(EventType.ITEM_METADATA_UPDATED, collectionSlug, callback);
   };
 
@@ -97,6 +123,7 @@ export class OpenSeaStreamClient {
     collectionSlug: string,
     callback: Callback<ItemCancelledEvent>
   ) => {
+    this.debug(`Listening for item cancellations on "${collectionSlug}"`);
     return this.on(EventType.ITEM_CANCELLED, collectionSlug, callback);
   };
 
@@ -104,6 +131,7 @@ export class OpenSeaStreamClient {
     collectionSlug: string,
     callback: Callback<ItemListedEvent>
   ) => {
+    this.debug(`Listening for item listings on "${collectionSlug}"`);
     return this.on(EventType.ITEM_LISTED, collectionSlug, callback);
   };
 
@@ -111,6 +139,7 @@ export class OpenSeaStreamClient {
     collectionSlug: string,
     callback: Callback<ItemSoldEvent>
   ) => {
+    this.debug(`Listening for item sales on "${collectionSlug}"`);
     return this.on(EventType.ITEM_SOLD, collectionSlug, callback);
   };
 
@@ -118,6 +147,7 @@ export class OpenSeaStreamClient {
     collectionSlug: string,
     callback: Callback<ItemTransferredEvent>
   ) => {
+    this.debug(`Listening for item transfers on "${collectionSlug}"`);
     return this.on(EventType.ITEM_TRANSFERRED, collectionSlug, callback);
   };
 
@@ -125,6 +155,7 @@ export class OpenSeaStreamClient {
     collectionSlug: string,
     callback: Callback<ItemReceivedOfferEvent>
   ) => {
+    this.debug(`Listening for item offers on "${collectionSlug}"`);
     return this.on(EventType.ITEM_RECEIVED_OFFER, collectionSlug, callback);
   };
 
@@ -132,6 +163,7 @@ export class OpenSeaStreamClient {
     collectionSlug: string,
     callback: Callback<ItemReceivedBidEvent>
   ) => {
+    this.debug(`Listening for item bids on "${collectionSlug}"`);
     return this.on(EventType.ITEM_RECEIVED_BID, collectionSlug, callback);
   };
 
