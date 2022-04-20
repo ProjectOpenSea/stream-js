@@ -158,9 +158,8 @@ export type ItemCancelledEvent = BaseStreamMessage<ItemCancelledEventPayload>;
 export type Callback<Event> = (event: Event) => unknown;
 
 export enum LogLevel {
-  NOTSET = 0,
-  ERROR = 1,
-  WARN = 2,
-  INFO = 3,
-  DEBUG = 4
+  DEBUG = 20,
+  INFO = 30,
+  WARN = 40,
+  ERROR = 50
 }

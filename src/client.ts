@@ -24,7 +24,7 @@ export class OpenSeaStreamClient {
     token,
     apiUrl,
     connectOptions,
-    logLevel = LogLevel.NOTSET,
+    logLevel = LogLevel.INFO,
     onError = (error) => this.error(error)
   }: ClientConfig) {
     this.socket = new Socket(apiUrl, {
@@ -37,25 +37,25 @@ export class OpenSeaStreamClient {
   }
 
   private debug(message: unknown) {
-    if (this.logLevel >= LogLevel.DEBUG) {
+    if (this.logLevel <= LogLevel.DEBUG) {
       console.debug(message);
     }
   }
 
-  private log(message: unknown) {
-    if (this.logLevel >= LogLevel.INFO) {
-      console.log(message);
+  private info(message: unknown) {
+    if (this.logLevel <= LogLevel.INFO) {
+      console.info(message);
     }
   }
 
   private warn(message: unknown) {
-    if (this.logLevel >= LogLevel.WARN) {
+    if (this.logLevel <= LogLevel.WARN) {
       console.warn(message);
     }
   }
 
   private error(message: unknown) {
-    if (this.logLevel >= LogLevel.ERROR) {
+    if (this.logLevel <= LogLevel.ERROR) {
       console.error(message);
     }
   }
@@ -66,7 +66,7 @@ export class OpenSeaStreamClient {
   };
 
   public disconnect = (
-    callback = () => this.log(`Succesfully disconnected from socket`)
+    callback = () => this.info(`Succesfully disconnected from socket`)
   ) => {
     this.channels.clear();
     return this.socket.disconnect(callback);
@@ -76,7 +76,7 @@ export class OpenSeaStreamClient {
     const channel = this.socket.channel(topic);
     channel
       .join()
-      .receive('ok', () => this.log(`Successfully joined channel "${topic}"`))
+      .receive('ok', () => this.info(`Successfully joined channel "${topic}"`))
       .receive('error', () => this.error(`Failed to join channel "${topic}"`));
 
     this.channels.set(topic, channel);
@@ -104,7 +104,7 @@ export class OpenSeaStreamClient {
     return () => {
       channel.leave().receive('ok', () => {
         this.channels.delete(topic);
-        this.log(
+        this.info(
           `Succesfully left channel "${topic}" listening for ${eventType}`
         );
       });
