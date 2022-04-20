@@ -38,7 +38,7 @@ const client = new OpenSeaStreamClient({
 You can also optionally pass in:
 
 - an `onError` callback to handle errors. The default behavior is to `console.error` the error.
-- a `logLevel` to set the log level. The default is `LogLevel.NOTSET`.
+- a `logLevel` to set the log level. The default is `LogLevel.INFO`.
 
 ## Manually connecting to the socket (optional)
 
