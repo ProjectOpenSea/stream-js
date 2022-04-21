@@ -1,9 +1,16 @@
+---
+title: OpenSea Stream API SDK
+excerpt: Documentation for the Javascript SDK for the OpenSea Stream API.
+category: 5b62171c27d11100030d47d8
+slug: openssea-stream-api-sdk
+---
+
 # OpenSea Streaming API - JavaScript SDK
 
 [![https://badges.frapsoft.com/os/mit/mit.svg?v=102](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://opensource.org/licenses/MIT)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
-A Javascript SDK for receiving updates from the OpenSea Streaming API - pushed over websockets. We currently support the following event types for collections:
+A Javascript SDK for receiving updates from the OpenSea Streaming API - pushed over websockets. We currently support the following event types on a per-collection basis:
 
 - item listed
 - item sold
@@ -13,7 +20,7 @@ A Javascript SDK for receiving updates from the OpenSea Streaming API - pushed o
 - item received offer
 - item received bid
 
-This is a best effort delievery messaging system. Messages that are not received due to connection errors will not be re-sent. Messages may be delievered out of order. This SDK is offered as a beta experience as we work with developers in the ecosystem to make this a more robust and reliable system.
+This is a best effort delivery messaging system. Messages that are not received due to connection errors will not be re-sent. Messages may be delievered out of order. This SDK is offered as a beta experience as we work with developers in the ecosystem to make this a more robust and reliable system.
 
 # Setup
 
@@ -22,7 +29,25 @@ And then `npm install`
 
 # Getting Started
 
-For our beta test users we are only using basic authentication using the same API Keys we provide in our REST API. To get started, request the basic API Key from us [here](https://docs.opensea.io/reference/request-an-api-key).
+## Authentication
+
+In order to make onboarding easy, we've integrated the OpenSea Stream API with our existing API key system. The API keys you have been using for the REST API should work here as well. If you don't already have one, request an API key from us [here](https://docs.opensea.io/reference/request-an-api-key).
+
+## Available Networks
+
+The OpenSea Stream API is available on the following networks:
+
+### Mainnet
+
+`wss://stream.openseabeta.com/socket`
+
+Mainnet supports events from the following blockchains: Ethereum, Polygon mainnet, Klaytn mainnet, and Solana mainnet.
+
+### Testnet
+
+`wss://testnets-stream.openseabeta.com/socket`
+
+Testnet supports events from the following blockchains: Rinkeby, Polygon testnet (Mumbai), and Klaytn testnet (Baobab).
 
 ## Create a client
 
@@ -31,7 +56,7 @@ import { OpenSeaStreamClient } from '@opensea/opensea-stream-js-sdk';
 
 const client = new OpenSeaStreamClient({
   apiUrl: 'apiURL',
-  token: 'dummyToken'
+  token: 'openseaApiKey'
 });
 ```
 
