@@ -13,10 +13,8 @@ jobs:
       - name: Checkout this repo
         uses: actions/checkout@v3
 
-      # Run GitHub Action to sync docs in `documentation` directory
-      - name: GitHub Action
-        # We recommend specifying a fixed version, i.e. @7.2.0
-        # Docs: https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions#example-using-versioned-actions
+      # Run GitHub Action to sync docs in `docs` directory
+      - name: Readme.io GitHub Action
         uses: readmeio/rdme@7.2.0
         with:
           rdme: docs ./docs --key=${{ secrets.README_API_KEY }} --version=1.0
