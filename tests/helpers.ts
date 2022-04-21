@@ -45,7 +45,8 @@ export const mockEvent = <Payload = unknown>(
     event_type: eventType,
     item: {
       contract_address: '0x',
-      token_id: '11'
+      token_id: '11',
+      permalink: 'https://opensea.io/assets/11'
     },
     item_metadata: {
       name: 'Bored Ape #11',

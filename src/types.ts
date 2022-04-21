@@ -22,6 +22,7 @@ export type BaseStreamMessage<Payload> = {
   item: {
     token_id: string;
     contract_address: string;
+    permalink: string;
   };
   item_metadata: {
     name: string;
