@@ -100,7 +100,7 @@ describe('event streams for EVM', () => {
         (event) => onItemListed(event)
       );
 
-      const payload = mockSolanaEvent(eventType, {});
+      const payload = mockEVMEvent(eventType, {});
 
       server.send(
         encode({
