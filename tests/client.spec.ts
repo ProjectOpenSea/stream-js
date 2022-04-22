@@ -1,6 +1,12 @@
 import { EventType, OpenSeaStreamClient } from '../src';
 import WS from 'jest-websocket-mock';
-import { getSocket, getChannels, encode, mockEvent } from './helpers';
+import {
+  getSocket,
+  getChannels,
+  encode,
+  mockEVMEvent,
+  mockSolanaEvent
+} from './helpers';
 import { collectionTopic } from '../src/helpers';
 
 let server: WS;
@@ -70,7 +76,7 @@ describe('unsubscribe', () => {
   });
 });
 
-describe('event streams', () => {
+describe('event streams for EVM', () => {
   Object.values(EventType).forEach((eventType) => {
     test(`${eventType}`, async () => {
       const collectionSlug = 'c1';
@@ -94,7 +100,69 @@ describe('event streams', () => {
         (event) => onItemListed(event)
       );
 
-      const payload = mockEvent(eventType, {});
+      const payload = mockSolanaEvent(eventType, {});
+
+      server.send(
+        encode({
+          topic: collectionTopic(collectionSlug),
+          event: eventType,
+          payload
+        })
+      );
+
+      expect(onItemListed).toBeCalledWith(payload);
+
+      server.send(
+        encode({
+          topic: collectionTopic(collectionSlug),
+          event: eventType,
+          payload
+        })
+      );
+
+      expect(onItemListed).toBeCalledTimes(2);
+
+      unsubscribe();
+
+      server.send(
+        encode({
+          topic: collectionTopic(collectionSlug),
+          event: eventType,
+          payload
+        })
+      );
+
+      expect(onItemListed).toBeCalledTimes(2);
+    });
+  });
+});
+
+// TODO: Is there a way for us to generalize the above test to run for both chains independently?
+describe('event streams for Solana', () => {
+  Object.values(EventType).forEach((eventType) => {
+    test(`${eventType}`, async () => {
+      const collectionSlug = 'c1';
+
+      streamClient = new OpenSeaStreamClient({
+        token: 'test',
+        apiUrl: 'ws://localhost:1234',
+        connectOptions: { transport: WebSocket }
+      });
+
+      // connection will fail as phoenix socket modified the endpoint url
+      const socket = getSocket(streamClient);
+      jest
+        .spyOn(socket, 'endPointURL')
+        .mockImplementation(() => 'ws://localhost:1234');
+
+      const onItemListed = jest.fn();
+      const unsubscribe = streamClient.onEvents(
+        collectionSlug,
+        [eventType],
+        (event) => onItemListed(event)
+      );
+
+      const payload = mockSolanaEvent(eventType, {});
 
       server.send(
         encode({

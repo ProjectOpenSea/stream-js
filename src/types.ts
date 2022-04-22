@@ -18,23 +18,32 @@ export enum EventType {
   ITEM_CANCELLED = 'item_cancelled'
 }
 
-export type BaseStreamMessage<Payload> = {
-  item: {
-    token_id: string;
-    contract_address: string;
-    permalink: string;
-  };
+export type BaseItemType = {
+  permalink: string;
   item_metadata: {
     name: string;
     image_url: string;
     animation_url: string;
     metadata_url: string;
   };
-  collection: {
-    slug: string;
-  };
   chain: {
     name: string;
+  };
+};
+
+export interface EVMItemType extends BaseItemType {
+  token_id: string;
+  contract_address: string;
+}
+
+export interface SolanaItemType extends BaseItemType {
+  mint_address: string;
+}
+
+export type BaseStreamMessage<Payload> = {
+  item: EVMItemType | SolanaItemType;
+  collection: {
+    slug: string;
   };
   event_type: string;
   timestamp: string;

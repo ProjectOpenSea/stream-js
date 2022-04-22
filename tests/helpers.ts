@@ -31,14 +31,11 @@ export const encode = ({
   return JSON.stringify([join_ref, ref, topic, event, payload]);
 };
 
-export const mockEvent = <Payload = unknown>(
+export const mockEVMEvent = <Payload = unknown>(
   eventType: EventType,
   payload: Payload
 ): BaseStreamMessage<Payload> => {
   return {
-    chain: {
-      name: 'Ethereum'
-    },
     collection: {
       slug: 'bored-ape'
     },
@@ -46,13 +43,43 @@ export const mockEvent = <Payload = unknown>(
     item: {
       contract_address: '0x',
       token_id: '11',
-      permalink: 'https://opensea.io/assets/11'
+      permalink: 'https://opensea.io/assets/11',
+      item_metadata: {
+        name: 'Bored Ape #11',
+        image_url: 'https://example.com/image.png',
+        animation_url: 'https://example.com/image.png',
+        metadata_url: 'https://example.com/image.png'
+      },
+      chain: {
+        name: 'Ethereum'
+      }
     },
-    item_metadata: {
-      name: 'Bored Ape #11',
-      image_url: 'https://example.com/image.png',
-      animation_url: 'https://example.com/image.png',
-      metadata_url: 'https://example.com/image.png'
+    payload,
+    timestamp: Date.now().toString()
+  };
+};
+
+export const mockSolanaEvent = <Payload = unknown>(
+  eventType: EventType,
+  payload: Payload
+): BaseStreamMessage<Payload> => {
+  return {
+    collection: {
+      slug: 'bored-ape'
+    },
+    event_type: eventType,
+    item: {
+      mint_address: '0x',
+      permalink: 'https://opensea.io/assets/11',
+      item_metadata: {
+        name: 'Bored Ape #11',
+        image_url: 'https://example.com/image.png',
+        animation_url: 'https://example.com/image.png',
+        metadata_url: 'https://example.com/image.png'
+      },
+      chain: {
+        name: 'Ethereum'
+      }
     },
     payload,
     timestamp: Date.now().toString()
