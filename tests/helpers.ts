@@ -44,7 +44,7 @@ export const mockEVMEvent = <Payload = unknown>(
       contract_address: '0x',
       token_id: '11',
       permalink: 'https://opensea.io/assets/11',
-      item_metadata: {
+      metadata: {
         name: 'Bored Ape #11',
         image_url: 'https://example.com/image.png',
         animation_url: 'https://example.com/image.png',
@@ -71,7 +71,7 @@ export const mockSolanaEvent = <Payload = unknown>(
     item: {
       mint_address: '0x',
       permalink: 'https://opensea.io/assets/11',
-      item_metadata: {
+      metadata: {
         name: 'Bored Ape #11',
         image_url: 'https://example.com/image.png',
         animation_url: 'https://example.com/image.png',

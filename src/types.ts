@@ -20,7 +20,7 @@ export enum EventType {
 
 export type BaseItemType = {
   permalink: string;
-  item_metadata: {
+  metadata: {
     name: string;
     image_url: string;
     animation_url: string;
