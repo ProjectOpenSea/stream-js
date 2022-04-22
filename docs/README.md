@@ -1,9 +1,11 @@
+<!--
 ---
 title: OpenSea Stream API SDK
 excerpt: Documentation for the Javascript SDK for the OpenSea Stream API.
 category: 5b62171c27d11100030d47d8
 slug: openssea-stream-api-sdk
 ---
+-->
 
 # OpenSea Streaming API - JavaScript SDK
 
