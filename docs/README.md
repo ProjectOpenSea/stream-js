@@ -7,12 +7,12 @@ slug: openssea-stream-api-sdk
 ---
 -->
 
-# OpenSea Streaming API - JavaScript SDK
+# OpenSea Stream API - JavaScript SDK
 
 [![https://badges.frapsoft.com/os/mit/mit.svg?v=102](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://opensource.org/licenses/MIT)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
-A Javascript SDK for receiving updates from the OpenSea Streaming API - pushed over websockets. We currently support the following event types on a per-collection basis:
+A Javascript SDK for receiving updates from the OpenSea Stream API - pushed over websockets. We currently support the following event types on a per-collection basis:
 
 - item listed
 - item sold
