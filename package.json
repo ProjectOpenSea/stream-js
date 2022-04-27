@@ -40,7 +40,7 @@
     "jest": "27.5.1",
     "jest-websocket-mock": "2.3.0",
     "lint-staged": "12.4.0",
-    "microbundle": "0.14.2",
+    "microbundle": "0.15.0",
     "prettier": "2.6.2",
     "prettier-package-json": "2.6.3",
     "rdme": "7.2.0",
