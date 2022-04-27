@@ -33,6 +33,23 @@ And then `npm install`
 
 In order to make onboarding easy, we've integrated the OpenSea Stream API with our existing API key system. The API keys you have been using for the REST API should work here as well. If you don't already have one, request an API key from us [here](https://docs.opensea.io/reference/request-an-api-key).
 
+## Create a client
+
+```javascript
+import { OpenSeaStreamClient } from '@opensea/opensea-stream-js-sdk';
+
+const client = new OpenSeaStreamClient({
+  token: 'openseaApiKey'
+});
+```
+
+You can also optionally pass in:
+
+- a `network` if you would like to access testnet networks. The default value is `Network.MAINNET`
+- `apiUrl` if you would like to access another OpenSea Stream API endpoint. Not needed if you provide a network or use the default values.
+- an `onError` callback to handle errors. The default behavior is to `console.error` the error.
+- a `logLevel` to set the log level. The default is `LogLevel.INFO`.
+
 ## Available Networks
 
 The OpenSea Stream API is available on the following networks:
@@ -49,21 +66,16 @@ Mainnet supports events from the following blockchains: Ethereum, Polygon mainne
 
 Testnet supports events from the following blockchains: Rinkeby, Polygon testnet (Mumbai), and Klaytn testnet (Baobab).
 
-## Create a client
+To create testnet instance of the client, you can create it with the following arguments:
 
 ```javascript
-import { OpenSeaStreamClient } from '@opensea/opensea-stream-js-sdk';
+import { OpenSeaStreamClient, Network } from '@opensea/opensea-stream-js-sdk';
 
 const client = new OpenSeaStreamClient({
-  apiUrl: 'apiURL',
+  network: Network.TESTNET,
   token: 'openseaApiKey'
 });
 ```
-
-You can also optionally pass in:
-
-- an `onError` callback to handle errors. The default behavior is to `console.error` the error.
-- a `logLevel` to set the log level. The default is `LogLevel.INFO`.
 
 ## Manually connecting to the socket (optional)
 
