@@ -18,7 +18,7 @@ export type ClientConfig = {
   logLevel?: LogLevel;
 };
 
-export declare enum Network {
+export enum Network {
   MAINNET = 'mainnet',
   TESTNET = 'testnet'
 }
