@@ -18,26 +18,25 @@ export enum EventType {
   ITEM_CANCELLED = 'item_cancelled'
 }
 
-export type BaseStreamMessage<Payload> = {
-  item: {
-    token_id: string;
-    contract_address: string;
-    permalink: string;
-  };
-  item_metadata: {
-    name: string;
-    image_url: string;
-    animation_url: string;
-    metadata_url: string;
-  };
-  collection: {
-    slug: string;
-  };
+export type BaseItemType = {
+  nft_id: string;
+  permalink: string;
+  metadata: BaseItemMetadataType;
   chain: {
     name: string;
   };
+};
+
+export type Payload = {
+  item: BaseItemType;
+  collection: {
+    slug: string;
+  };
+};
+
+export type BaseStreamMessage<Payload> = {
   event_type: string;
-  timestamp: string;
+  sent_at: string;
   payload: Payload;
 };
 
@@ -50,19 +49,18 @@ export type Trait = {
   order: number;
 };
 
-export type ItemMetadataUpdatePayload = {
+export type BaseItemMetadataType = {
   name: string;
-  description: string;
   image_url: string;
-  image_preview_url: string;
-  image_thumbnail_url: string;
-  image_original_url: string;
   animation_url: string;
-  animation_original_url: string;
-  background_color: string;
   metadata_url: string;
-  traits: [Trait];
 };
+
+export interface ItemMetadataUpdatePayload extends BaseItemMetadataType {
+  description: string;
+  background_color: string;
+  traits: [Trait];
+}
 export type ItemMetadataUpdate = BaseStreamMessage<ItemMetadataUpdatePayload>;
 
 export type Account = {
