@@ -12,8 +12,10 @@ import {
   ItemReceivedOfferEvent,
   ItemCancelledEvent,
   Callback,
-  LogLevel
+  LogLevel,
+  Network
 } from './types';
+import { ENDPOINTS } from './constants';
 
 export class OpenSeaStreamClient {
   private socket: Socket;
@@ -21,13 +23,15 @@ export class OpenSeaStreamClient {
   private logLevel: LogLevel;
 
   constructor({
+    network = Network.MAINNET,
     token,
     apiUrl,
     connectOptions,
     logLevel = LogLevel.INFO,
     onError = (error) => this.error(error)
   }: ClientConfig) {
-    this.socket = new Socket(apiUrl, {
+    const endpoint = apiUrl || ENDPOINTS[network];
+    this.socket = new Socket(endpoint, {
       params: { token },
       ...connectOptions
     });

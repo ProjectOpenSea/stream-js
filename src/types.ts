@@ -1,12 +1,27 @@
 import type { SocketConnectOption } from 'phoenix';
 
+/**
+ * OpenSea Stream API configuration object
+ * @param token API key to use for API
+ * @param network `Network` type to use. Defaults to `Network.MAINNET`
+ * @param apiUrl Optional base URL to use for the API.
+ * @param connectOptions `SocketConnectOption` type to use to connect to the Stream API socket.
+ * @param onError a callback function to use whenever errors occur in the SDK.
+ * @param logLevel `LogLevel` type to define the amount of logging the SDK should provide.
+ */
 export type ClientConfig = {
-  apiUrl: string;
+  network?: Network;
+  apiUrl?: string;
   token: string;
   connectOptions?: Partial<SocketConnectOption>;
   onError?: (error: unknown) => void;
   logLevel?: LogLevel;
 };
+
+export enum Network {
+  MAINNET = 'mainnet',
+  TESTNET = 'testnet'
+}
 
 export enum EventType {
   ITEM_METADATA_UPDATED = 'item_metadata_updated',
