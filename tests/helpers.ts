@@ -36,25 +36,8 @@ export const mockEvent = <Payload = unknown>(
   payload: Payload
 ): BaseStreamMessage<Payload> => {
   return {
-    chain: {
-      name: 'Ethereum'
-    },
-    collection: {
-      slug: 'bored-ape'
-    },
     event_type: eventType,
-    item: {
-      contract_address: '0x',
-      token_id: '11',
-      permalink: 'https://opensea.io/assets/11'
-    },
-    item_metadata: {
-      name: 'Bored Ape #11',
-      image_url: 'https://example.com/image.png',
-      animation_url: 'https://example.com/image.png',
-      metadata_url: 'https://example.com/image.png'
-    },
     payload,
-    timestamp: Date.now().toString()
+    sent_at: Date.now().toString()
   };
 };
