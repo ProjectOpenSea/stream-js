@@ -45,7 +45,9 @@ const client = new OpenSeaStreamClient({
 
 You can also optionally pass in:
 
-- a `network` if you would like to access testnet networks. The default value is `Network.MAINNET`
+- a `network` if you would like to access testnet networks.
+  - The default value is `Network.MAINNET`, which represents the following blockchains: Ethereum, Polygon mainnet, Klaytn mainnet, and Solana mainnet
+  - Can also select `Network.TESTNET`, which represents the following blockchains: Rinkeby, Polygon testnet (Mumbai), and Klaytn testnet (Baobab).
 - `apiUrl` if you would like to access another OpenSea Stream API endpoint. Not needed if you provide a network or use the default values.
 - an `onError` callback to handle errors. The default behavior is to `console.error` the error.
 - a `logLevel` to set the log level. The default is `LogLevel.INFO`.
