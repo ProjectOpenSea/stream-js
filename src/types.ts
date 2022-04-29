@@ -101,6 +101,7 @@ export type ItemListedEventPayload = {
   base_price: number;
   payment_token: PaymentToken;
   is_private: boolean;
+  event_timestamp: string;
 };
 
 export type ItemListedEvent = BaseStreamMessage<ItemListedEventPayload>;
@@ -120,6 +121,7 @@ export type ItemSoldEventPayload = {
   sale_price: number;
   payment_token: PaymentToken;
   is_private: boolean;
+  event_timestamp: string;
 };
 
 export type ItemSoldEvent = BaseStreamMessage<ItemSoldEventPayload>;
@@ -129,6 +131,7 @@ export type ItemTransferredEventPayload = {
   quantity: number;
   to_account: Account;
   transaction: Transaction;
+  event_timestamp: string;
 };
 
 export type ItemTransferredEvent =
@@ -142,6 +145,7 @@ export type ItemReceivedBidEventPayload = {
   taker: Account;
   base_price: number;
   payment_token: PaymentToken;
+  event_timestamp: string;
 };
 
 export type ItemReceivedBidEvent =
@@ -155,6 +159,7 @@ export type ItemReceivedOfferEventPayload = {
   taker: Account;
   base_price: number;
   payment_token: PaymentToken;
+  event_timestamp: string;
 };
 
 export type ItemReceivedOfferEvent =
@@ -165,6 +170,7 @@ export type ItemCancelledEventPayload = {
   listing_type: string;
   transaction: Transaction;
   payment_token: PaymentToken;
+  event_timestamp: string;
 };
 
 export type ItemCancelledEvent = BaseStreamMessage<ItemCancelledEventPayload>;
