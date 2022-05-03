@@ -64,12 +64,12 @@ export type Trait = {
   order: number;
 };
 
-export type BaseItemMetadataType = {
+export interface BaseItemMetadataType extends Payload {
   name: string;
   image_url: string;
   animation_url: string;
   metadata_url: string;
-};
+}
 
 export interface ItemMetadataUpdatePayload extends BaseItemMetadataType {
   description: string;
@@ -91,7 +91,7 @@ export type PaymentToken = {
   usd_price: string;
 };
 
-export type ItemListedEventPayload = {
+export interface ItemListedEventPayload extends Payload {
   quantity: number;
   listing_type: string;
   listing_date: string;
@@ -102,7 +102,7 @@ export type ItemListedEventPayload = {
   payment_token: PaymentToken;
   is_private: boolean;
   event_timestamp: string;
-};
+}
 
 export type ItemListedEvent = BaseStreamMessage<ItemListedEventPayload>;
 
@@ -111,7 +111,7 @@ export type Transaction = {
   timestamp: string;
 };
 
-export type ItemSoldEventPayload = {
+export interface ItemSoldEventPayload extends Payload {
   quantity: number;
   listing_type: string;
   closing_date: string;
@@ -122,22 +122,22 @@ export type ItemSoldEventPayload = {
   payment_token: PaymentToken;
   is_private: boolean;
   event_timestamp: string;
-};
+}
 
 export type ItemSoldEvent = BaseStreamMessage<ItemSoldEventPayload>;
 
-export type ItemTransferredEventPayload = {
+export interface ItemTransferredEventPayload extends Payload {
   from_account: Account;
   quantity: number;
   to_account: Account;
   transaction: Transaction;
   event_timestamp: string;
-};
+}
 
 export type ItemTransferredEvent =
   BaseStreamMessage<ItemTransferredEventPayload>;
 
-export type ItemReceivedBidEventPayload = {
+export interface ItemReceivedBidEventPayload extends Payload {
   quantity: number;
   created_date: string;
   expiration_date: string;
@@ -146,12 +146,12 @@ export type ItemReceivedBidEventPayload = {
   base_price: number;
   payment_token: PaymentToken;
   event_timestamp: string;
-};
+}
 
 export type ItemReceivedBidEvent =
   BaseStreamMessage<ItemReceivedBidEventPayload>;
 
-export type ItemReceivedOfferEventPayload = {
+export interface ItemReceivedOfferEventPayload extends Payload {
   quantity: number;
   created_date: string;
   expiration_date: string;
@@ -160,18 +160,18 @@ export type ItemReceivedOfferEventPayload = {
   base_price: number;
   payment_token: PaymentToken;
   event_timestamp: string;
-};
+}
 
 export type ItemReceivedOfferEvent =
   BaseStreamMessage<ItemReceivedOfferEventPayload>;
 
-export type ItemCancelledEventPayload = {
+export interface ItemCancelledEventPayload extends Payload {
   quantity: number;
   listing_type: string;
   transaction: Transaction;
   payment_token: PaymentToken;
   event_timestamp: string;
-};
+}
 
 export type ItemCancelledEvent = BaseStreamMessage<ItemCancelledEventPayload>;
 
