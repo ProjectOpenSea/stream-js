@@ -4,7 +4,11 @@
   "description": "An SDK to receive pushed updates from OpenSea over websocket",
   "license": "MIT",
   "author": "OpenSea Developers",
+  "homepage": "https://docs.opensea.io/reference/stream-api-overview",
   "repository": "https://github.com/ProjectOpenSea/opensea-stream-js-sdk",
+  "bugs": {
+    "url": "https://github.com/ProjectOpenSea/opensea-stream-js-sdk/issues"
+  },
   "main": "./dist/index.cjs",
   "module": "./dist/index.module.js",
   "files": [
@@ -48,6 +52,21 @@
     "ts-node": "10.7.0",
     "typescript": "4.6.4"
   },
+  "keywords": [
+    "collectibles",
+    "crypto",
+    "ethereum",
+    "javascript",
+    "marketplace",
+    "nft",
+    "node",
+    "non-fungible-tokens",
+    "opensea",
+    "project-opensea",
+    "sdk",
+    "smart-contracts",
+    "websocket"
+  ],
   "exports": {
     "require": "./dist/index.cjs",
     "default": "./dist/index.modern.js"
