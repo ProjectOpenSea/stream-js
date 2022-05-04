@@ -1,6 +1,6 @@
 {
   "name": "@opensea/opensea-stream-js-sdk",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "An SDK to receive pushed updates from OpenSea over websocket",
   "license": "MIT",
   "author": "OpenSea Developers",
