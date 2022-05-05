@@ -1,6 +1,6 @@
 {
   "name": "@opensea/stream-js",
-  "version": "0.0.7",
+  "version": "0.0.11",
   "description": "An SDK to receive pushed updates from OpenSea over websocket",
   "license": "MIT",
   "author": "OpenSea Developers",
@@ -9,7 +9,8 @@
   "bugs": {
     "url": "https://github.com/ProjectOpenSea/stream-js/issues"
   },
-  "main": "./dist/index.js",
+  "type": "module",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.module.js",
   "files": [
     "dist"
@@ -28,11 +29,11 @@
   },
   "sideEffects": false,
   "dependencies": {
+    "@types/phoenix": "^1.5.4",
     "phoenix": "^1.6.2"
   },
   "devDependencies": {
     "@types/jest": "27.5.0",
-    "@types/phoenix": "^1.5.4",
     "@types/ws": "8.5.3",
     "@typescript-eslint/eslint-plugin": "5.22.0",
     "@typescript-eslint/parser": "5.22.0",
