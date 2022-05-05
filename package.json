@@ -1,13 +1,13 @@
 {
-  "name": "@opensea/opensea-stream-js-sdk",
-  "version": "0.0.3",
+  "name": "@opensea/stream-js",
+  "version": "0.0.4",
   "description": "An SDK to receive pushed updates from OpenSea over websocket",
   "license": "MIT",
   "author": "OpenSea Developers",
   "homepage": "https://docs.opensea.io/reference/stream-api-overview",
-  "repository": "https://github.com/ProjectOpenSea/opensea-stream-js-sdk",
+  "repository": "https://github.com/ProjectOpenSea/stream-js",
   "bugs": {
-    "url": "https://github.com/ProjectOpenSea/opensea-stream-js-sdk/issues"
+    "url": "https://github.com/ProjectOpenSea/stream-js/issues"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.module.js",
