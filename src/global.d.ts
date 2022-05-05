@@ -2,6 +2,7 @@
 // Should be top-level
 
 // Taken from opensea-js
+// declare module 'phoenix';
 
 /* tslint:enable */
 declare module '*.json' {

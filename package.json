@@ -28,11 +28,11 @@
   },
   "sideEffects": false,
   "dependencies": {
+    "@types/phoenix": "^1.5.4",
     "phoenix": "^1.6.2"
   },
   "devDependencies": {
     "@types/jest": "27.5.0",
-    "@types/phoenix": "^1.5.4",
     "@types/ws": "8.5.3",
     "@typescript-eslint/eslint-plugin": "5.22.0",
     "@typescript-eslint/parser": "5.22.0",
