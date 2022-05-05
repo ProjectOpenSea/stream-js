@@ -67,10 +67,10 @@ While developing and debugging changes to this SDK, you can 'test-run' them loca
    npm link
    ```
 
-2. In your other package's root directory, make sure to remove `next` from `node_modules` with:
+2. In your other package's root directory, make sure to remove `@opensea/stream-js` from `node_modules` with:
 
    ```sh
-   rm -rf ./node_modules/next
+   rm -rf ./node_modules/@opensea/stream-js
    ```
 
 3. In your other package's root directory, run:
