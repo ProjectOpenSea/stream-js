@@ -20,6 +20,7 @@ This is a best effort delivery messaging system. Messages that are not received 
 We recommend switching to Node.js version 16 to make sure common crypto dependencies work. Our minimum supported version is 16.11.0.
 
 - Install this package with `npm install @opensea/stream-js`
+- Install the required dev-dependency to use the Phoenix client for web socket connections `npm install --save-dev @types/phoenix`
 
 # Getting Started
 
