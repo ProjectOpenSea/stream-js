@@ -1,10 +1,3 @@
----
-title: OpenSea Stream API SDK
-excerpt: Documentation for the Javascript SDK for the OpenSea Stream API.
-category: 5b62171c27d11100030d47d8
-slug: openssea-stream-api-sdk
----
-
 # OpenSea Stream API - JavaScript SDK
 
 [![https://badges.frapsoft.com/os/mit/mit.svg?v=102](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://opensource.org/licenses/MIT)
@@ -22,10 +15,12 @@ A Javascript SDK for receiving updates from the OpenSea Stream API - pushed over
 
 This is a best effort delivery messaging system. Messages that are not received due to connection errors will not be re-sent. Messages may be delievered out of order. This SDK is offered as a beta experience as we work with developers in the ecosystem to make this a more robust and reliable system.
 
-# Setup
+# Installation
 
-Run `nvm use`  
-And then `npm install`
+We recommend switching to Node.js version 16 to make sure common crypto dependencies work. Our minimum supported version is 16.11.0.
+
+- If you have Node Version Manager, run `nvm use` to ensure a compatible version is being used.
+- Install this package with `yarn install --save @opensea/stream-api`
 
 # Getting Started
 
