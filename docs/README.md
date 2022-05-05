@@ -20,7 +20,7 @@ This is a best effort delivery messaging system. Messages that are not received 
 We recommend switching to Node.js version 16 to make sure common crypto dependencies work. Our minimum supported version is 16.11.0.
 
 - If you have Node Version Manager, run `nvm use` to ensure a compatible version is being used.
-- Install this package with `yarn install --save @opensea/stream-api`
+- Install this package with `yarn add --dev @opensea/stream-api`
 
 # Getting Started
 
