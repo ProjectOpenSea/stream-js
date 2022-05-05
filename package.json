@@ -1,6 +1,6 @@
 {
   "name": "@opensea/stream-js",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "An SDK to receive pushed updates from OpenSea over websocket",
   "license": "MIT",
   "author": "OpenSea Developers",
@@ -19,7 +19,7 @@
     "check-types": "tsc --noEmit",
     "dev": "microbundle watch",
     "eslint": "eslint . --max-warnings 0 --ext .js,.ts --fix",
-    "lint:check": "concurrently \"npm run check-types\" \"npm run eslint\" \"yarn prettier:check\" \"npm run prettier:check:package.json\"",
+    "lint:check": "concurrently \"yarn run check-types\" \"yarn run eslint\" \"yarn prettier:check\" \"yarn run prettier:check:package.json\"",
     "prepare": "husky install",
     "test": "jest",
     "prettier:check": "prettier --check .",
