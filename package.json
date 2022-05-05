@@ -9,6 +9,7 @@
   "bugs": {
     "url": "https://github.com/ProjectOpenSea/stream-js/issues"
   },
+  "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.module.js",
   "files": [
