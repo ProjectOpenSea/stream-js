@@ -5,7 +5,7 @@ const pack = require('./package');
 
 const config: Config.InitialOptions = {
   displayName: pack.name,
-  name: pack.name,
+  id: pack.name,
   modulePaths: ['<rootDir>/src'],
   preset: 'ts-jest',
   testEnvironment: 'jsdom'
