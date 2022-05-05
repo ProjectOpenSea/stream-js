@@ -29,7 +29,7 @@ In order to make onboarding easy, we've integrated the OpenSea Stream API with o
 ## Create a client
 
 ```javascript
-import { OpenSeaStreamClient } from '@opensea/opensea-stream-js-sdk';
+import { OpenSeaStreamClient } from '@opensea/stream-js';
 
 const client = new OpenSeaStreamClient({
   token: 'openseaApiKey'
@@ -64,7 +64,7 @@ Testnet supports events from the following blockchains: Rinkeby, Polygon testnet
 To create testnet instance of the client, you can create it with the following arguments:
 
 ```javascript
-import { OpenSeaStreamClient, Network } from '@opensea/opensea-stream-js-sdk';
+import { OpenSeaStreamClient, Network } from '@opensea/stream-js';
 
 const client = new OpenSeaStreamClient({
   network: Network.TESTNET,
