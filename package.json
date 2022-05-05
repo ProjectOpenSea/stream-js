@@ -19,7 +19,7 @@
     "check-types": "tsc --noEmit",
     "dev": "microbundle watch",
     "eslint": "eslint . --max-warnings 0 --ext .js,.ts --fix",
-    "lint:check": "concurrently \"npm run check-types\" \"npm run eslint\" \"npm prettier:check\" \"npm run prettier:check:package.json\"",
+    "lint:check": "concurrently \"npm run check-types\" \"npm run eslint\" \"npm run prettier:check\" \"npm run prettier:check:package.json\"",
     "prepare": "husky install",
     "test": "jest",
     "prettier:check": "prettier --check .",
