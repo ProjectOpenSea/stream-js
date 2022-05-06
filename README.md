@@ -31,10 +31,14 @@ In order to make onboarding easy, we've integrated the OpenSea Stream API with o
 ## Create a client
 
 ```javascript
-import { OpenSeaStreamClient } from '@opensea/stream-js';
+const {OpenSeaStreamClient} = require('@opensea/stream-js');
+const {WebSocket} = require('ws')
 
 const client = new OpenSeaStreamClient({
-  token: 'openseaApiKey'
+  token: 'openseaApiKey',
+  connectOptions: {
+    transport: WebSocket,
+},
 });
 ```
 
