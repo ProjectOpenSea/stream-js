@@ -31,10 +31,14 @@ export class OpenSeaStreamClient {
     onError = (error) => this.error(error)
   }: ClientConfig) {
     const endpoint = apiUrl || ENDPOINTS[network];
+    const webTransportDefault =
+      typeof window !== 'undefined' ? window.WebSocket : undefined;
     this.socket = new Socket(endpoint, {
       params: { token },
+      transport: webTransportDefault,
       ...connectOptions
     });
+
     this.socket.onError(onError);
     this.channels = new Map<string, Channel>();
     this.logLevel = logLevel;
@@ -42,25 +46,25 @@ export class OpenSeaStreamClient {
 
   private debug(message: unknown) {
     if (this.logLevel <= LogLevel.DEBUG) {
-      console.debug(message);
+      console.debug(`[DEBUG]: ${message}`);
     }
   }
 
   private info(message: unknown) {
     if (this.logLevel <= LogLevel.INFO) {
-      console.info(message);
+      console.info(`[INFO]: ${message}`);
     }
   }
 
   private warn(message: unknown) {
     if (this.logLevel <= LogLevel.WARN) {
-      console.warn(message);
+      console.warn(`[WARN]: ${message}`);
     }
   }
 
   private error(message: unknown) {
     if (this.logLevel <= LogLevel.ERROR) {
-      console.error(message);
+      console.error(`[ERROR]: ${message}`);
     }
   }
 
@@ -90,6 +94,7 @@ export class OpenSeaStreamClient {
   private getChannel = (topic: string): Channel => {
     let channel = this.channels.get(topic);
     if (!channel) {
+      this.debug(`Creating channel for topic: "${topic}"`);
       channel = this.createChannel(topic);
     }
     return channel;
@@ -103,9 +108,12 @@ export class OpenSeaStreamClient {
     this.socket.connect();
 
     const topic = collectionTopic(collectionSlug);
+    this.debug(`Fetching channel ${topic}`);
     const channel = this.getChannel(topic);
+    this.debug(`Subscribing to ${eventType} events on ${topic}`);
     channel.on(eventType, callback);
     return () => {
+      this.debug(`Unsubscribing from ${eventType} events on ${topic}`);
       channel.leave().receive('ok', () => {
         this.channels.delete(topic);
         this.info(
