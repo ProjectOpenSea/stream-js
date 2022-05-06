@@ -1,4 +1,4 @@
-import { Socket, Channel, LongPoll } from 'phoenix';
+import { Socket, Channel } from 'phoenix';
 import { collectionTopic } from './helpers';
 import {
   ClientConfig,
