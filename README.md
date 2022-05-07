@@ -55,7 +55,6 @@ const client = new OpenSeaStreamClient({
 });
 ```
 
-
 You can also optionally pass in:
 
 - a `network` if you would like to access testnet networks.
