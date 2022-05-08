@@ -178,7 +178,20 @@ export class OpenSeaStreamClient {
     this.debug(`Listening for item bids on "${collectionSlug}"`);
     return this.on(EventType.ITEM_RECEIVED_BID, collectionSlug, callback);
   };
-
+  public multipleCollections = async (
+    event: EventType,
+    collections: string[],
+    callback: Callback<BaseStreamMessage<unknown>>
+  ) => {
+    const subscriptions = collections.map((collection) =>
+      this.on(event, collection, callback)
+    );
+    return () => {
+      for (const unsubscribe of subscriptions) {
+        unsubscribe();
+      }
+    };
+  };
   public onEvents = (
     collectionSlug: string,
     eventTypes: EventType[],
