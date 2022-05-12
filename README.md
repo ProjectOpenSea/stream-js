@@ -22,6 +22,7 @@ We recommend switching to Node.js version 16 to make sure common crypto dependen
 - Install this package with `npm install @opensea/stream-js`
 - **NodeJS only:** Install the WebSocket library with `npm install ws`
 - Install the required dev-dependency to use the Phoenix client for web socket connections `npm install --save-dev @types/phoenix`
+- Install websocket with `npm install ws`
 
 # Getting Started
 
@@ -34,10 +35,14 @@ In order to make onboarding easy, we've integrated the OpenSea Stream API with o
 ### Browser
 
 ```javascript
-import { OpenSeaStreamClient } from '@opensea/stream-js';
+const {OpenSeaStreamClient} = require('@opensea/stream-js');
+const {WebSocket} = require('ws')
 
 const client = new OpenSeaStreamClient({
-  token: 'openseaApiKey'
+  token: 'openseaApiKey',
+  connectOptions: {
+    transport: WebSocket,
+},
 });
 ```
 
