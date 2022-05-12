@@ -64,7 +64,7 @@ export type Trait = {
   order: number;
 };
 
-export interface BaseItemMetadataType extends Payload {
+export interface BaseItemMetadataType {
   name: string;
   image_url: string;
   animation_url: string;
