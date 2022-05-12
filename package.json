@@ -32,7 +32,7 @@
     "phoenix": "^1.6.2"
   },
   "devDependencies": {
-    "@types/jest": "27.5.0",
+    "@types/jest": "27.5.1",
     "@types/phoenix": "1.5.4",
     "@types/ws": "8.5.3",
     "@typescript-eslint/eslint-plugin": "5.23.0",
