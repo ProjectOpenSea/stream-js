@@ -28,6 +28,7 @@
     "prettier:fix": "prettier --write ."
   },
   "sideEffects": false,
+  "types": "./dist/index.d.ts",
   "dependencies": {
     "phoenix": "^1.6.2"
   },
