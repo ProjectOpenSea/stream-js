@@ -33,7 +33,7 @@
     "phoenix": "^1.6.2"
   },
   "devDependencies": {
-    "@types/jest": "27.5.1",
+    "@types/jest": "27.5.2",
     "@types/phoenix": "1.5.4",
     "@types/ws": "8.5.3",
     "@typescript-eslint/eslint-plugin": "5.23.0",
@@ -43,8 +43,8 @@
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "4.0.0",
     "husky": "8.0.1",
-    "jest": "28.1.0",
-    "jest-environment-jsdom": "28.1.0",
+    "jest": "28.1.1",
+    "jest-environment-jsdom": "28.1.1",
     "jest-websocket-mock": "2.3.0",
     "lint-staged": "12.4.1",
     "microbundle": "0.15.0",
