@@ -11,6 +11,8 @@ import {
   ItemReceivedBidEvent,
   ItemReceivedOfferEvent,
   ItemCancelledEvent,
+  CollectionOfferEvent,
+  TraitOfferEvent,
   Callback,
   LogLevel,
   Network
@@ -177,6 +179,22 @@ export class OpenSeaStreamClient {
   ) => {
     this.debug(`Listening for item bids on "${collectionSlug}"`);
     return this.on(EventType.ITEM_RECEIVED_BID, collectionSlug, callback);
+  };
+
+  public onCollectionOffer = (
+    collectionSlug: string,
+    callback: Callback<CollectionOfferEvent>
+  ) => {
+    this.debug(`Listening for collection offers on "${collectionSlug}"`);
+    return this.on(EventType.COLLECTION_OFFER, collectionSlug, callback);
+  };
+
+  public onTraitOffer = (
+    collectionSlug: string,
+    callback: Callback<TraitOfferEvent>
+  ) => {
+    this.debug(`Listening for trait offers on "${collectionSlug}"`);
+    return this.on(EventType.TRAIT_OFFER, collectionSlug, callback);
   };
 
   public onEvents = (

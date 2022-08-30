@@ -30,7 +30,9 @@ export enum EventType {
   ITEM_TRANSFERRED = 'item_transferred',
   ITEM_RECEIVED_OFFER = 'item_received_offer',
   ITEM_RECEIVED_BID = 'item_received_bid',
-  ITEM_CANCELLED = 'item_cancelled'
+  ITEM_CANCELLED = 'item_cancelled',
+  COLLECTION_OFFER = 'collection_offer',
+  TRAIT_OFFER = 'trait_offer'
 }
 
 export type BaseItemType = {
@@ -174,6 +176,27 @@ export interface ItemCancelledEventPayload extends Payload {
 }
 
 export type ItemCancelledEvent = BaseStreamMessage<ItemCancelledEventPayload>;
+
+export interface CollectionOfferEventPayload extends Payload {
+  quantity: number;
+  listing_type: string;
+  transaction: Transaction;
+  payment_token: PaymentToken;
+  event_timestamp: string;
+}
+
+export type CollectionOfferEvent =
+  BaseStreamMessage<CollectionOfferEventPayload>;
+
+export interface TraitOfferEventPayload extends Payload {
+  quantity: number;
+  listing_type: string;
+  transaction: Transaction;
+  payment_token: PaymentToken;
+  event_timestamp: string;
+}
+
+export type TraitOfferEvent = BaseStreamMessage<TraitOfferEventPayload>;
 
 export type Callback<Event> = (event: Event) => unknown;
 
