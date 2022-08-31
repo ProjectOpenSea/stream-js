@@ -179,9 +179,14 @@ export type ItemCancelledEvent = BaseStreamMessage<ItemCancelledEventPayload>;
 
 export interface CollectionOfferEventPayload extends Payload {
   quantity: number;
-  listing_type: string;
-  transaction: Transaction;
+  created_date: string;
+  expiration_date: string;
+  maker: Account;
+  base_price: string;
+  order_hash: string;
   payment_token: PaymentToken;
+  collection_criteria: object;
+  asset_contract_criteria: object;
   event_timestamp: string;
 }
 
@@ -190,9 +195,15 @@ export type CollectionOfferEvent =
 
 export interface TraitOfferEventPayload extends Payload {
   quantity: number;
-  listing_type: string;
-  transaction: Transaction;
+  created_date: string;
+  expiration_date: string;
+  maker: Account;
+  base_price: string;
+  order_hash: string;
   payment_token: PaymentToken;
+  collection_criteria: object;
+  asset_contract_criteria: object;
+  trait_criteria: object;
   event_timestamp: string;
 }
 
