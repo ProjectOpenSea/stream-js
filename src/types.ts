@@ -103,6 +103,7 @@ export interface ItemListedEventPayload extends Payload {
   base_price: string;
   payment_token: PaymentToken;
   is_private: boolean;
+  order_hash: string;
   event_timestamp: string;
 }
 
@@ -145,6 +146,7 @@ export interface ItemReceivedBidEventPayload extends Payload {
   expiration_date: string;
   maker: Account;
   taker: Account;
+  order_hash: string;
   base_price: string;
   payment_token: PaymentToken;
   event_timestamp: string;
@@ -159,6 +161,7 @@ export interface ItemReceivedOfferEventPayload extends Payload {
   expiration_date: string;
   maker: Account;
   taker: Account;
+  order_hash: string;
   base_price: string;
   payment_token: PaymentToken;
   event_timestamp: string;
@@ -169,9 +172,16 @@ export type ItemReceivedOfferEvent =
 
 export interface ItemCancelledEventPayload extends Payload {
   quantity: number;
+  base_price: string;
+  expiration_date: string;
+  maker: Account;
+  taker: Account;
   listing_type: string;
+  listing_date: string;
   transaction: Transaction;
   payment_token: PaymentToken;
+  order_hash: string;
+  is_private: boolean;
   event_timestamp: string;
 }
 
