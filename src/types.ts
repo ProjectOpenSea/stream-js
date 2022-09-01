@@ -121,6 +121,7 @@ export interface ItemSoldEventPayload extends Payload {
   transaction: Transaction;
   maker: Account;
   taker: Account;
+  order_hash: string;
   sale_price: string;
   payment_token: PaymentToken;
   is_private: boolean;
