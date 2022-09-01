@@ -192,6 +192,7 @@ export interface CollectionOfferEventPayload extends Payload {
   created_date: string;
   expiration_date: string;
   maker: Account;
+  taker: Account;
   base_price: string;
   order_hash: string;
   payment_token: PaymentToken;
@@ -208,6 +209,7 @@ export interface TraitOfferEventPayload extends Payload {
   created_date: string;
   expiration_date: string;
   maker: Account;
+  taker: Account;
   base_price: string;
   order_hash: string;
   payment_token: PaymentToken;
