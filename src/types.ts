@@ -1,9 +1,9 @@
 import type { SocketConnectOption } from 'phoenix';
 
-export type OnClientEvent = (
+export type OnClientEvent = <Payload>(
   collection: string,
   eventType: EventType,
-  event: Event
+  event: BaseStreamMessage<Payload>
 ) => boolean;
 
 /**
