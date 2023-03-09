@@ -15,7 +15,8 @@ import {
   TraitOfferEvent,
   Callback,
   LogLevel,
-  Network
+  Network,
+  MiddlewareFn
 } from './types';
 import { ENDPOINTS } from './constants';
 
@@ -23,6 +24,7 @@ export class OpenSeaStreamClient {
   private socket: Socket;
   private channels: Map<string, Channel>;
   private logLevel: LogLevel;
+  private middleware: MiddlewareFn[];
 
   constructor({
     network = Network.MAINNET,
@@ -30,7 +32,8 @@ export class OpenSeaStreamClient {
     apiUrl,
     connectOptions,
     logLevel = LogLevel.INFO,
-    onError = (error) => this.error(error)
+    onError = (error) => this.error(error),
+    middleware = []
   }: ClientConfig) {
     const endpoint = apiUrl || ENDPOINTS[network];
     const webTransportDefault =
@@ -44,6 +47,7 @@ export class OpenSeaStreamClient {
     this.socket.onError(onError);
     this.channels = new Map<string, Channel>();
     this.logLevel = logLevel;
+    this.middleware = middleware;
   }
 
   private debug(message: unknown) {
@@ -113,7 +117,15 @@ export class OpenSeaStreamClient {
     this.debug(`Fetching channel ${topic}`);
     const channel = this.getChannel(topic);
     this.debug(`Subscribing to ${eventType} events on ${topic}`);
-    channel.on(eventType, callback);
+
+    const middleware = this.middleware;
+    channel.on(eventType, (event) => {
+      for (const middlewareCallback of middleware) {
+        middlewareCallback(collectionSlug, eventType, event);
+      }
+      callback(event);
+    });
+
     return () => {
       this.debug(`Unsubscribing from ${eventType} events on ${topic}`);
       channel.leave().receive('ok', () => {

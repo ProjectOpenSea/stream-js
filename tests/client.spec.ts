@@ -130,3 +130,66 @@ describe('event streams', () => {
     });
   });
 });
+
+describe('middleware', () => {
+  test('single', () => {
+    const collectionSlug = 'c1';
+
+    const middlewareFn = jest.fn();
+
+    streamClient = new OpenSeaStreamClient({
+      token: 'test',
+      apiUrl: 'ws://localhost:1234',
+      connectOptions: { transport: WebSocket },
+      middleware: [middlewareFn]
+    });
+
+    const socket = getSocket(streamClient);
+    jest
+      .spyOn(socket, 'endPointURL')
+      .mockImplementation(() => 'ws://localhost:1234');
+
+    const onItemListed = jest.fn();
+
+    const listingEvent = mockEvent(EventType.ITEM_LISTED, {});
+    const saleEvent = mockEvent(EventType.ITEM_SOLD, {});
+
+    streamClient.onEvents(
+      collectionSlug,
+      [EventType.ITEM_LISTED, EventType.ITEM_SOLD],
+      (event) => onItemListed(event)
+    );
+
+    server.send(
+      encode({
+        topic: collectionTopic(collectionSlug),
+        event: EventType.ITEM_LISTED,
+        payload: listingEvent
+      })
+    );
+
+    server.send(
+      encode({
+        topic: collectionTopic(collectionSlug),
+        event: EventType.ITEM_SOLD,
+        payload: saleEvent
+      })
+    );
+
+    expect(middlewareFn).nthCalledWith(
+      1,
+      collectionSlug,
+      EventType.ITEM_LISTED,
+      listingEvent
+    );
+
+    expect(middlewareFn).nthCalledWith(
+      2,
+      collectionSlug,
+      EventType.ITEM_SOLD,
+      saleEvent
+    );
+
+    streamClient.disconnect();
+  });
+});

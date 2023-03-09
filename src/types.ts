@@ -1,5 +1,11 @@
 import type { SocketConnectOption } from 'phoenix';
 
+export type MiddlewareFn = (
+  collection: string,
+  eventType: EventType,
+  event: Event
+) => unknown;
+
 /**
  * OpenSea Stream API configuration object
  * @param token API key to use for API
@@ -8,6 +14,7 @@ import type { SocketConnectOption } from 'phoenix';
  * @param connectOptions `SocketConnectOption` type to use to connect to the Stream API socket.
  * @param onError a callback function to use whenever errors occur in the SDK.
  * @param logLevel `LogLevel` type to define the amount of logging the SDK should provide.
+ * @param middleware list of middleware function that will be invoked on each event.
  */
 export type ClientConfig = {
   network?: Network;
@@ -16,6 +23,7 @@ export type ClientConfig = {
   connectOptions?: Partial<SocketConnectOption>;
   onError?: (error: unknown) => void;
   logLevel?: LogLevel;
+  middleware?: MiddlewareFn[];
 };
 
 export enum Network {
