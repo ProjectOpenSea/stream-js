@@ -16,7 +16,7 @@ import {
   Callback,
   LogLevel,
   Network,
-  MiddlewareFn
+  OnClientEvent
 } from './types';
 import { ENDPOINTS } from './constants';
 
@@ -24,7 +24,7 @@ export class OpenSeaStreamClient {
   private socket: Socket;
   private channels: Map<string, Channel>;
   private logLevel: LogLevel;
-  private middleware: MiddlewareFn[];
+  private onEvent: OnClientEvent;
 
   constructor({
     network = Network.MAINNET,
@@ -33,7 +33,7 @@ export class OpenSeaStreamClient {
     connectOptions,
     logLevel = LogLevel.INFO,
     onError = (error) => this.error(error),
-    middleware = []
+    onEvent = () => true
   }: ClientConfig) {
     const endpoint = apiUrl || ENDPOINTS[network];
     const webTransportDefault =
@@ -47,7 +47,7 @@ export class OpenSeaStreamClient {
     this.socket.onError(onError);
     this.channels = new Map<string, Channel>();
     this.logLevel = logLevel;
-    this.middleware = middleware;
+    this.onEvent = onEvent;
   }
 
   private debug(message: unknown) {
@@ -118,12 +118,11 @@ export class OpenSeaStreamClient {
     const channel = this.getChannel(topic);
     this.debug(`Subscribing to ${eventType} events on ${topic}`);
 
-    const middleware = this.middleware;
+    const onClientEvent = this.onEvent;
     channel.on(eventType, (event) => {
-      for (const middlewareCallback of middleware) {
-        middlewareCallback(collectionSlug, eventType, event);
+      if (onClientEvent(collectionSlug, eventType, event)) {
+        callback(event);
       }
-      callback(event);
     });
 
     return () => {
