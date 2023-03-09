@@ -1,5 +1,11 @@
 import type { SocketConnectOption } from 'phoenix';
 
+export type OnClientEvent = <Payload>(
+  collection: string,
+  eventType: EventType,
+  event: BaseStreamMessage<Payload>
+) => boolean;
+
 /**
  * OpenSea Stream API configuration object
  * @param token API key to use for API
@@ -8,6 +14,7 @@ import type { SocketConnectOption } from 'phoenix';
  * @param connectOptions `SocketConnectOption` type to use to connect to the Stream API socket.
  * @param onError a callback function to use whenever errors occur in the SDK.
  * @param logLevel `LogLevel` type to define the amount of logging the SDK should provide.
+ * @param onEvent a callback function to use whenever an event is emmited in the SDK. Can be used to globally apply some logic, e.g emitting metric/logging etc. If the onEvent handler returns false, event will be filtered and the subscription callback won't be invoked.
  */
 export type ClientConfig = {
   network?: Network;
@@ -16,6 +23,7 @@ export type ClientConfig = {
   connectOptions?: Partial<SocketConnectOption>;
   onError?: (error: unknown) => void;
   logLevel?: LogLevel;
+  onEvent?: OnClientEvent;
 };
 
 export enum Network {

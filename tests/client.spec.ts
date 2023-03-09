@@ -130,3 +130,141 @@ describe('event streams', () => {
     });
   });
 });
+
+describe('middleware', () => {
+  test('single', () => {
+    const collectionSlug = 'c1';
+
+    const onClientEvent = jest.fn().mockImplementation(() => true);
+
+    streamClient = new OpenSeaStreamClient({
+      token: 'test',
+      apiUrl: 'ws://localhost:1234',
+      connectOptions: { transport: WebSocket },
+      onEvent: onClientEvent
+    });
+
+    const socket = getSocket(streamClient);
+    jest
+      .spyOn(socket, 'endPointURL')
+      .mockImplementation(() => 'ws://localhost:1234');
+
+    const onEvent = jest.fn();
+
+    const listingEvent = mockEvent(EventType.ITEM_LISTED, {});
+    const saleEvent = mockEvent(EventType.ITEM_SOLD, {});
+
+    streamClient.onEvents(
+      collectionSlug,
+      [EventType.ITEM_LISTED, EventType.ITEM_SOLD],
+      (event) => onEvent(event)
+    );
+
+    server.send(
+      encode({
+        topic: collectionTopic(collectionSlug),
+        event: EventType.ITEM_LISTED,
+        payload: listingEvent
+      })
+    );
+
+    server.send(
+      encode({
+        topic: collectionTopic(collectionSlug),
+        event: EventType.ITEM_SOLD,
+        payload: saleEvent
+      })
+    );
+
+    expect(onClientEvent).nthCalledWith(
+      1,
+      collectionSlug,
+      EventType.ITEM_LISTED,
+      listingEvent
+    );
+
+    expect(onClientEvent).nthCalledWith(
+      2,
+      collectionSlug,
+      EventType.ITEM_SOLD,
+      saleEvent
+    );
+
+    expect(onEvent).nthCalledWith(1, listingEvent);
+    expect(onEvent).nthCalledWith(2, saleEvent);
+
+    streamClient.disconnect();
+  });
+
+  test('filter out events', () => {
+    const collectionSlug = 'c1';
+
+    const onClientEvent = jest
+      .fn()
+      .mockImplementation(
+        (_c, _e, event) => event.payload.chain === 'ethereum'
+      );
+
+    streamClient = new OpenSeaStreamClient({
+      token: 'test',
+      apiUrl: 'ws://localhost:1234',
+      connectOptions: { transport: WebSocket },
+      onEvent: onClientEvent
+    });
+
+    const socket = getSocket(streamClient);
+    jest
+      .spyOn(socket, 'endPointURL')
+      .mockImplementation(() => 'ws://localhost:1234');
+
+    const onEvent = jest.fn();
+
+    const ethereumListing = mockEvent(EventType.ITEM_LISTED, {
+      chain: 'ethereum'
+    });
+    const polygonListing = mockEvent(EventType.ITEM_LISTED, {
+      chain: 'polygon'
+    });
+
+    streamClient.onEvents(
+      collectionSlug,
+      [EventType.ITEM_LISTED, EventType.ITEM_SOLD],
+      (event) => onEvent(event)
+    );
+
+    server.send(
+      encode({
+        topic: collectionTopic(collectionSlug),
+        event: EventType.ITEM_LISTED,
+        payload: ethereumListing
+      })
+    );
+
+    server.send(
+      encode({
+        topic: collectionTopic(collectionSlug),
+        event: EventType.ITEM_SOLD,
+        payload: polygonListing
+      })
+    );
+
+    expect(onClientEvent).nthCalledWith(
+      1,
+      collectionSlug,
+      EventType.ITEM_LISTED,
+      ethereumListing
+    );
+
+    expect(onClientEvent).nthCalledWith(
+      2,
+      collectionSlug,
+      EventType.ITEM_SOLD,
+      polygonListing
+    );
+
+    expect(onEvent).toHaveBeenCalledTimes(1);
+    expect(onEvent).toHaveBeenCalledWith(ethereumListing);
+
+    streamClient.disconnect();
+  });
+});
