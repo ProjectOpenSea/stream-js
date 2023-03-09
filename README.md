@@ -1,6 +1,7 @@
 # OpenSea Stream API - JavaScript SDK
 
 [![https://badges.frapsoft.com/os/mit/mit.svg?v=102](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://opensource.org/licenses/MIT)
+[![Coverage Status](https://coveralls.io/repos/github/ProjectOpenSea/stream-js/badge.svg?branch=main)](https://coveralls.io/github/ProjectOpenSea/stream-js?branch=main)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
 A Javascript SDK for receiving updates from the OpenSea Stream API - pushed over websockets. We currently support the following event types on a per-collection basis:
