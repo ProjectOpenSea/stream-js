@@ -101,7 +101,7 @@ export class OpenSeaStreamClient {
     let channel = this.channels.get(topic);
     if (!channel) {
       this.debug(`Creating channel for topic: "${topic}"`);
-      channel = this.createChannel(topic);
+      channel = this.createChannel(topic).onError((error) => { console.log("channel error", error) });
     }
     return channel;
   };
