@@ -30,7 +30,7 @@
   "sideEffects": false,
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "phoenix": "^1.6.2"
+    "phoenix": "^1.6.15"
   },
   "devDependencies": {
     "@types/jest": "29.4.0",
