@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '16.11.0'
+          node-version-file: .nvmrc
 
       - name: Install dependencies
         run: npm ci
@@ -30,7 +30,26 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '16.11.0'
+          node-version-file: .nvmrc
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test -- --coverage --ci --runInBand
+
+      - name: Upload code coverage
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+  
+  test-earliest-node-engine-support:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.11.0' # specified in the package.json engines.node field
 
       - name: Install dependencies
         run: npm ci
@@ -49,7 +68,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '16.11.0'
+          node-version-file: .nvmrc
 
       - name: Install dependencies
         run: npm ci
