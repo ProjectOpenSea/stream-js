@@ -67,25 +67,36 @@ export type BaseStreamMessage<Payload> = {
 
 export type Trait = {
   trait_type: string;
-  value: string;
-  display_type: string;
-  max_value: number;
-  trait_count: string;
-  order: number;
+  value: string | null;
+  display_type: string | null;
+  max_value: number | null;
+  trait_count: number | null;
+  order: number | null;
 };
 
-export interface BaseItemMetadataType extends Payload {
+interface BaseItemMetadataType extends Payload {
   name: string;
   image_url: string;
   animation_url: string;
   metadata_url: string;
 }
 
-export interface ItemMetadataUpdatePayload extends BaseItemMetadataType {
-  description: string;
-  background_color: string;
-  traits: [Trait];
+export interface ItemMetadataUpdatePayload {
+  collection: { slug: string };
+  item: {
+    chain: { name: string };
+    metadata: {
+      name: string | null;
+      image_url: string | null;
+      animation_url: string | null;
+      metadata_url: string | null;
+      description: string | null;
+      backrgound_color: string | null;
+      traits: Trait[];
+    };
+  };
 }
+
 export type ItemMetadataUpdate = BaseStreamMessage<ItemMetadataUpdatePayload>;
 
 export type Account = {
