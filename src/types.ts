@@ -43,10 +43,17 @@ export enum EventType {
   TRAIT_OFFER = 'trait_offer'
 }
 
-export type BaseItemType = {
+interface BaseItemMetadataType {
+  name: string | null;
+  image_url: string | null;
+  animation_url: string | null;
+  metadata_url: string | null;
+}
+
+export type BaseItemType<Metadata = BaseItemMetadataType> = {
   nft_id: string;
   permalink: string;
-  metadata: BaseItemMetadataType;
+  metadata: Metadata;
   chain: {
     name: string;
   };
@@ -67,25 +74,24 @@ export type BaseStreamMessage<Payload> = {
 
 export type Trait = {
   trait_type: string;
-  value: string;
-  display_type: string;
-  max_value: number;
-  trait_count: string;
-  order: number;
+  value: string | null;
+  display_type: string | null;
+  max_value: number | null;
+  trait_count: number | null;
+  order: number | null;
 };
 
-export interface BaseItemMetadataType extends Payload {
-  name: string;
-  image_url: string;
-  animation_url: string;
-  metadata_url: string;
+interface ExtendedItemMetadataType extends BaseItemMetadataType {
+  description: string | null;
+  backrgound_color: string | null;
+  traits: Trait[];
 }
 
-export interface ItemMetadataUpdatePayload extends BaseItemMetadataType {
-  description: string;
-  background_color: string;
-  traits: [Trait];
-}
+export type ItemMetadataUpdatePayload = {
+  collection: { slug: string };
+  item: BaseItemType<ExtendedItemMetadataType>;
+};
+
 export type ItemMetadataUpdate = BaseStreamMessage<ItemMetadataUpdatePayload>;
 
 export type Account = {
