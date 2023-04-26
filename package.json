@@ -46,7 +46,7 @@
     "jest": "29.5.0",
     "jest-environment-jsdom": "29.5.0",
     "jest-websocket-mock": "2.4.0",
-    "lint-staged": "13.2.1",
+    "lint-staged": "13.2.2",
     "microbundle": "0.15.1",
     "prettier": "2.8.7",
     "prettier-package-json": "2.6.4",
