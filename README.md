@@ -1,8 +1,11 @@
 # OpenSea Stream API - JavaScript SDK
 
-[![https://badges.frapsoft.com/os/mit/mit.svg?v=102](https://badges.frapsoft.com/os/mit/mit.svg?v=102)](https://opensource.org/licenses/MIT)
-[![Coverage Status](https://coveralls.io/repos/github/ProjectOpenSea/stream-js/badge.svg?branch=main)](https://coveralls.io/github/ProjectOpenSea/stream-js?branch=main)
-[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Version][version-badge]][version-link]
+[![npm][npm-badge]][npm-link]
+[![Test CI][ci-badge]][ci-link]
+[![Coverage Status][coverage-badge]][coverage-link]
+[![License][license-badge]][license-link]
+[![Docs][docs-badge]][docs-link]
 
 A Javascript SDK for receiving updates from the OpenSea Stream API - pushed over websockets. We currently support the following event types on a per-collection basis:
 
@@ -196,3 +199,24 @@ unsubscribe();
 ```javascript
 client.disconnect();
 ```
+
+## Contributing
+
+See [the contributing guide](./.github/CONTRIBUTING.md) for detailed instructions on how to get started with this project.
+
+## License
+
+[MIT](LICENSE) Copyright 2022 Ozone Networks, Inc.
+
+[version-badge]: https://img.shields.io/github/package-json/v/ProjectOpenSea/stream-js
+[version-link]: https://github.com/ProjectOpenSea/stream-js/releases
+[npm-badge]: https://img.shields.io/npm/v/@opensea/stream-js?color=red
+[npm-link]: https://www.npmjs.com/package/@opensea/stream-js
+[ci-badge]: https://github.com/ProjectOpenSea/stream-js/actions/workflows/ci.yml/badge.svg
+[ci-link]: https://github.com/ProjectOpenSea/stream-js/actions/workflows/ci.yml
+[coverage-badge]: https://coveralls.io/repos/github/ProjectOpenSea/stream-js/badge.svg?branch=main
+[coverage-link]: https://coveralls.io/github/ProjectOpenSea/stream-js?branch=main
+[license-badge]: https://img.shields.io/github/license/ProjectOpenSea/stream-js
+[license-link]: https://github.com/ProjectOpenSea/stream-js/blob/main/LICENSE
+[docs-badge]: https://img.shields.io/badge/Stream.js-documentation-informational
+[docs-link]: https://github.com/ProjectOpenSea/stream-js/tree/main/docs
