@@ -13,7 +13,7 @@ A Javascript SDK for receiving updates from the OpenSea Stream API - pushed over
 - item sold
 - item transferred
 - item metadata updates
-- item canceled
+- item cancelled
 - item received offer
 - item received bid
 
