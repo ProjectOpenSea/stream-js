@@ -5,7 +5,7 @@
 [![Test CI][ci-badge]][ci-link]
 [![Coverage Status][coverage-badge]][coverage-link]
 [![License][license-badge]][license-link]
-[![Docs][docs-badge]][docs-link]    
+[![Docs][docs-badge]][docs-link]
 
 A Javascript SDK for receiving updates from the OpenSea Stream API - pushed over websockets. We currently support the following event types on a per-collection basis:
 
@@ -199,6 +199,14 @@ unsubscribe();
 ```javascript
 client.disconnect();
 ```
+
+## Contributing
+
+See [the contributing guide](./.github/CONTRIBUTING.md) for detailed instructions on how to get started with this project.
+
+## License
+
+[MIT](LICENSE) Copyright 2022 Ozone Networks, Inc.
 
 [version-badge]: https://img.shields.io/github/package-json/v/ProjectOpenSea/stream-js
 [version-link]: https://github.com/ProjectOpenSea/stream-js/releases
