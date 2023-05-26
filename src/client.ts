@@ -225,7 +225,7 @@ export class OpenSeaStreamClient {
     callback: Callback<OrderValidationEvent>
   ) => {
     this.debug(
-      `Listening for order invalidation events on "${collectionSlug}"`
+      `Listening for order revalidation events on "${collectionSlug}"`
     );
     return this.on(EventType.ORDER_REVALIDATE, collectionSlug, callback);
   };
