@@ -40,7 +40,9 @@ export enum EventType {
   ITEM_RECEIVED_BID = 'item_received_bid',
   ITEM_CANCELLED = 'item_cancelled',
   COLLECTION_OFFER = 'collection_offer',
-  TRAIT_OFFER = 'trait_offer'
+  TRAIT_OFFER = 'trait_offer',
+  ORDER_INVALIDATE = 'order_invalidate',
+  ORDER_REVALIDATE = 'order_revalidate'
 }
 
 interface BaseItemMetadataType {
@@ -235,6 +237,21 @@ export interface TraitOfferEventPayload extends Payload {
 }
 
 export type TraitOfferEvent = BaseStreamMessage<TraitOfferEventPayload>;
+
+export interface OrderValidationEventPayload {
+  event_timestamp: string;
+  order_hash: string;
+  protocol_address: string;
+  chain: {
+    name: string;
+  };
+  collection: {
+    slug: string;
+  };
+}
+
+export type OrderValidationEvent =
+  BaseStreamMessage<OrderValidationEventPayload>;
 
 export type Callback<Event> = (event: Event) => unknown;
 
