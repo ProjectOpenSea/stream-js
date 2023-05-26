@@ -3,7 +3,6 @@
 [![Version][version-badge]][version-link]
 [![npm][npm-badge]][npm-link]
 [![Test CI][ci-badge]][ci-link]
-[![Coverage Status][coverage-badge]][coverage-link]
 [![License][license-badge]][license-link]
 [![Docs][docs-badge]][docs-link]
 
@@ -214,8 +213,6 @@ See [the contributing guide](./.github/contributing.md) for detailed instruction
 [npm-link]: https://www.npmjs.com/package/@opensea/stream-js
 [ci-badge]: https://github.com/ProjectOpenSea/stream-js/actions/workflows/ci.yml/badge.svg
 [ci-link]: https://github.com/ProjectOpenSea/stream-js/actions/workflows/ci.yml
-[coverage-badge]: https://coveralls.io/repos/github/ProjectOpenSea/stream-js/badge.svg?branch=main
-[coverage-link]: https://coveralls.io/github/ProjectOpenSea/stream-js?branch=main
 [license-badge]: https://img.shields.io/github/license/ProjectOpenSea/stream-js
 [license-link]: https://github.com/ProjectOpenSea/stream-js/blob/main/LICENSE
 [docs-badge]: https://img.shields.io/badge/Stream.js-documentation-informational
