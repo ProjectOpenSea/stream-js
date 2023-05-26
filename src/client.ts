@@ -17,7 +17,6 @@ import {
   LogLevel,
   Network,
   OnClientEvent,
-  OrderValidationEventPayload,
   OrderValidationEvent
 } from './types';
 import { ENDPOINTS } from './constants';
