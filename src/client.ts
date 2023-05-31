@@ -16,7 +16,8 @@ import {
   Callback,
   LogLevel,
   Network,
-  OnClientEvent
+  OnClientEvent,
+  OrderValidationEvent
 } from './types';
 import { ENDPOINTS } from './constants';
 
@@ -206,6 +207,26 @@ export class OpenSeaStreamClient {
   ) => {
     this.debug(`Listening for trait offers on "${collectionSlug}"`);
     return this.on(EventType.TRAIT_OFFER, collectionSlug, callback);
+  };
+
+  public onOrderInvalidate = (
+    collectionSlug: string,
+    callback: Callback<OrderValidationEvent>
+  ) => {
+    this.debug(
+      `Listening for order invalidation events on "${collectionSlug}"`
+    );
+    return this.on(EventType.ORDER_INVALIDATE, collectionSlug, callback);
+  };
+
+  public onOrderRevalidate = (
+    collectionSlug: string,
+    callback: Callback<OrderValidationEvent>
+  ) => {
+    this.debug(
+      `Listening for order revalidation events on "${collectionSlug}"`
+    );
+    return this.on(EventType.ORDER_REVALIDATE, collectionSlug, callback);
   };
 
   public onEvents = (

@@ -13,6 +13,11 @@ A Javascript SDK for receiving updates from the OpenSea Stream API - pushed over
 - item received offer
 - item received bid
 
+Thise types are currently be expiremented with and for now are released on a small number of collections:
+
+- order_invalidate
+- order_revalidate
+
 This is a best effort delivery messaging system. Messages that are not received due to connection errors will not be re-sent. Messages may be delievered out of order. This SDK is offered as a beta experience as we work with developers in the ecosystem to make this a more robust and reliable system.
 
 # Installation
