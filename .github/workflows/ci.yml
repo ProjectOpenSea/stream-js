@@ -36,7 +36,12 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm run test -- --ci --runInBand
+        run: npm run test -- --ci --coverage --runInBand
+
+      - name: Upload code coverage
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
   test-earliest-node-engine-support:
     runs-on: ubuntu-latest
