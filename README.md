@@ -1,10 +1,14 @@
-# OpenSea Stream API - JavaScript SDK
+<p align="center">
+  <img src="./img/banner.png" />
+</p>
 
 [![Version][version-badge]][version-link]
 [![npm][npm-badge]][npm-link]
 [![Test CI][ci-badge]][ci-link]
 [![License][license-badge]][license-link]
 [![Docs][docs-badge]][docs-link]
+
+# OpenSea Stream API - JavaScript SDK
 
 A Javascript SDK for receiving updates from the OpenSea Stream API - pushed over websockets. We currently support the following event types on a per-collection basis:
 
