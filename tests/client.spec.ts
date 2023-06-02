@@ -1,10 +1,16 @@
-import { EventType, OpenSeaStreamClient } from '../src';
+import { EventType, LogLevel, OpenSeaStreamClient } from '../src';
 import WS from 'jest-websocket-mock';
 import { getSocket, getChannels, encode, mockEvent } from './helpers';
 import { collectionTopic } from '../src/helpers';
 
 let server: WS;
 let streamClient: OpenSeaStreamClient;
+
+const clientOpts = {
+  token: 'test',
+  apiUrl: 'ws://localhost:1234',
+  logLevel: LogLevel.WARN
+};
 
 beforeEach(() => {
   server = new WS('ws://localhost:1234');
@@ -19,10 +25,7 @@ afterEach(() => {
 });
 
 test('constructor', async () => {
-  streamClient = new OpenSeaStreamClient({
-    token: 'test',
-    apiUrl: 'ws://localhost:1234'
-  });
+  streamClient = new OpenSeaStreamClient(clientOpts);
 
   const socket = getSocket(streamClient);
   expect(socket.protocol()).toBe('ws');
@@ -34,10 +37,7 @@ test('constructor', async () => {
 
 describe('unsubscribe', () => {
   test('channel', () => {
-    streamClient = new OpenSeaStreamClient({
-      token: 'test',
-      apiUrl: 'ws://localhost:1234'
-    });
+    streamClient = new OpenSeaStreamClient(clientOpts);
 
     const unsubscribec1 = streamClient.onItemListed('c1', jest.fn());
     const unsubscribec2 = streamClient.onItemListed('c2', jest.fn());
@@ -57,10 +57,7 @@ describe('unsubscribe', () => {
   });
 
   test('socket', () => {
-    streamClient = new OpenSeaStreamClient({
-      token: 'test',
-      apiUrl: 'ws://localhost:1234'
-    });
+    streamClient = new OpenSeaStreamClient(clientOpts);
 
     streamClient.onItemListed('c1', jest.fn());
     streamClient.onItemListed('c2', jest.fn());
@@ -76,8 +73,7 @@ describe('event streams', () => {
       const collectionSlug = 'c1';
 
       streamClient = new OpenSeaStreamClient({
-        token: 'test',
-        apiUrl: 'ws://localhost:1234',
+        ...clientOpts,
         connectOptions: { transport: WebSocket }
       });
 
@@ -138,8 +134,7 @@ describe('middleware', () => {
     const onClientEvent = jest.fn().mockImplementation(() => true);
 
     streamClient = new OpenSeaStreamClient({
-      token: 'test',
-      apiUrl: 'ws://localhost:1234',
+      ...clientOpts,
       connectOptions: { transport: WebSocket },
       onEvent: onClientEvent
     });
@@ -206,8 +201,7 @@ describe('middleware', () => {
       );
 
     streamClient = new OpenSeaStreamClient({
-      token: 'test',
-      apiUrl: 'ws://localhost:1234',
+      ...clientOpts,
       connectOptions: { transport: WebSocket },
       onEvent: onClientEvent
     });
