@@ -32,6 +32,9 @@
   "dependencies": {
     "phoenix": "^1.6.15"
   },
+  "optionalDependencies": {
+    "fsevents": "*"
+  },
   "devDependencies": {
     "@types/jest": "29.5.0",
     "@types/phoenix": "1.5.6",
