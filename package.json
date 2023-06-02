@@ -23,6 +23,7 @@
     "lint:check": "concurrently \"npm run check-types\" \"npm run eslint\" \"npm run prettier:check\" \"npm run prettier:check:package.json\"",
     "prepare": "husky install",
     "test": "jest",
+    "coverage": "npm run test -- --coverage --collectCoverageFrom='./src/**'",
     "prettier:check": "prettier --check .",
     "prettier:check:package.json": "prettier-package-json --list-different",
     "prettier:fix": "prettier --write . && prettier-package-json --write package.json"
