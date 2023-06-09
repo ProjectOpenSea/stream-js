@@ -1,5 +1,5 @@
 {
-  "extends": ["config:base", ":pinOnlyDevDependencies"],
+  "extends": ["config:base"],
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
