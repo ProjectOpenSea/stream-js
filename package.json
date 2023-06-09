@@ -38,9 +38,6 @@
   "dependencies": {
     "phoenix": "^1.6.15"
   },
-  "optionalDependencies": {
-    "fsevents": "*"
-  },
   "devDependencies": {
     "@types/jest": "^29.5.0",
     "@types/phoenix": "^1.5.6",
@@ -59,7 +56,6 @@
     "microbundle": "^0.15.1",
     "prettier": "^2.8.8",
     "prettier-package-json": "^2.6.4",
-    "rdme": "^8.6.3",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
