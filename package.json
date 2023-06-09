@@ -10,6 +10,10 @@
     "url": "https://github.com/ProjectOpenSea/stream-js/issues"
   },
   "type": "module",
+  "exports": {
+    "require": "./dist/index.cjs",
+    "default": "./dist/index.modern.js"
+  },
   "main": "./dist/index.cjs",
   "module": "./dist/index.module.js",
   "files": [
@@ -24,10 +28,10 @@
     "eslint": "eslint . --max-warnings 0 --ext .js,.ts --fix",
     "lint:check": "concurrently \"npm run check-types\" \"npm run eslint\" \"npm run prettier:check\" \"npm run prettier:check:package.json\"",
     "prepare": "husky install",
-    "test": "jest",
     "prettier:check": "prettier --check .",
     "prettier:check:package.json": "prettier-package-json --list-different",
-    "prettier:fix": "prettier --write . && prettier-package-json --write package.json"
+    "prettier:fix": "prettier --write . && prettier-package-json --write package.json",
+    "test": "jest"
   },
   "sideEffects": false,
   "types": "./dist/index.d.ts",
@@ -77,10 +81,6 @@
   ],
   "engines": {
     "node": ">=16.11.0"
-  },
-  "exports": {
-    "require": "./dist/index.cjs",
-    "default": "./dist/index.modern.js"
   },
   "lint-staged": {
     "package.json": [
