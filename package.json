@@ -1,6 +1,6 @@
 {
   "name": "@opensea/stream-js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An SDK to receive pushed updates from OpenSea over websocket",
   "license": "MIT",
   "author": "OpenSea Developers",
@@ -13,11 +13,13 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.module.js",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "scripts": {
     "build": "microbundle",
     "check-types": "tsc --noEmit",
+    "coverage": "npm run test -- --coverage --collectCoverageFrom='./src/**'",
     "dev": "microbundle watch",
     "eslint": "eslint . --max-warnings 0 --ext .js,.ts --fix",
     "lint:check": "concurrently \"npm run check-types\" \"npm run eslint\" \"npm run prettier:check\" \"npm run prettier:check:package.json\"",
@@ -32,28 +34,31 @@
   "dependencies": {
     "phoenix": "^1.6.15"
   },
+  "optionalDependencies": {
+    "fsevents": "*"
+  },
   "devDependencies": {
-    "@types/jest": "29.5.0",
-    "@types/phoenix": "1.5.6",
-    "@types/ws": "8.5.4",
-    "@typescript-eslint/eslint-plugin": "5.59.6",
-    "@typescript-eslint/parser": "5.59.6",
-    "concurrently": "8.0.1",
-    "eslint": "8.41.0",
-    "eslint-config-prettier": "8.8.0",
-    "eslint-plugin-prettier": "4.2.1",
-    "husky": "8.0.3",
-    "jest": "29.5.0",
-    "jest-environment-jsdom": "29.5.0",
-    "jest-websocket-mock": "2.4.0",
-    "lint-staged": "13.2.2",
-    "microbundle": "0.15.1",
-    "prettier": "2.8.8",
-    "prettier-package-json": "2.6.4",
-    "rdme": "8.6.3",
-    "ts-jest": "29.1.0",
-    "ts-node": "10.9.1",
-    "typescript": "5.0.4"
+    "@types/jest": "^29.5.0",
+    "@types/phoenix": "^1.5.6",
+    "@types/ws": "^8.5.4",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
+    "@typescript-eslint/parser": "^5.59.6",
+    "concurrently": "^8.0.1",
+    "eslint": "^8.41.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "jest-websocket-mock": "^2.4.0",
+    "lint-staged": "^13.2.2",
+    "microbundle": "^0.15.1",
+    "prettier": "^2.8.8",
+    "prettier-package-json": "^2.6.4",
+    "rdme": "^8.6.3",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
   },
   "keywords": [
     "collectibles",
