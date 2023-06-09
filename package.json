@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@types/jest": "^29.5.0",
-    "@types/phoenix": "^1.5.6",
+    "@types/phoenix": "^1.6.0",
     "@types/ws": "^8.5.4",
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "@typescript-eslint/parser": "^5.59.6",
