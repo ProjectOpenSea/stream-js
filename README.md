@@ -223,4 +223,4 @@ See [the contributing guide](./.github/contributing.md) for detailed instruction
 [license-badge]: https://img.shields.io/github/license/ProjectOpenSea/stream-js
 [license-link]: https://github.com/ProjectOpenSea/stream-js/blob/main/LICENSE
 [docs-badge]: https://img.shields.io/badge/Stream.js-documentation-informational
-[docs-link]: https://github.com/ProjectOpenSea/stream-js/tree/main#getting-started
+[docs-link]: https://github.com/ProjectOpenSea/stream-js#getting-started
