@@ -1,6 +1,6 @@
 {
   "name": "@opensea/stream-js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An SDK to receive pushed updates from OpenSea over websocket",
   "license": "MIT",
   "author": "OpenSea Developers",
@@ -31,6 +31,9 @@
   "types": "./dist/index.d.ts",
   "dependencies": {
     "phoenix": "^1.6.15"
+  },
+  "optionalDependencies": {
+    "fsevents": "*"
   },
   "devDependencies": {
     "@types/jest": "^29.5.0",
