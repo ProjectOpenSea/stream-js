@@ -2,12 +2,10 @@ import { jest } from '@jest/globals';
 import { WS } from 'jest-websocket-mock';
 import { getSocket, getChannels, encode, mockEvent } from './helpers.js';
 import {
-  BaseItemType,
   EventType,
   LogLevel,
   OnClientEvent,
-  OpenSeaStreamClient,
-  Payload
+  OpenSeaStreamClient
 } from '../src/index.js';
 import { collectionTopic } from '../src/helpers.js';
 
