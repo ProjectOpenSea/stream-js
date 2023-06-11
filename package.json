@@ -32,7 +32,7 @@
     "prettier:check": "prettier --check .",
     "prettier:check:package.json": "prettier-package-json --list-different",
     "prettier:fix": "prettier --write . && prettier-package-json --write package.json",
-    "test": "jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "sideEffects": false,
   "types": "./dist/index.d.ts",
