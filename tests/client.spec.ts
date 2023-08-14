@@ -1,7 +1,13 @@
-import { EventType, LogLevel, OpenSeaStreamClient } from '../src';
-import WS from 'jest-websocket-mock';
-import { getSocket, getChannels, encode, mockEvent } from './helpers';
-import { collectionTopic } from '../src/helpers';
+import { jest } from '@jest/globals';
+import { WS } from 'jest-websocket-mock';
+import { getSocket, getChannels, encode, mockEvent } from './helpers.js';
+import {
+  EventType,
+  LogLevel,
+  OnClientEvent,
+  OpenSeaStreamClient
+} from '../src/index.js';
+import { collectionTopic } from '../src/helpers.js';
 
 let server: WS;
 let streamClient: OpenSeaStreamClient;
@@ -131,7 +137,9 @@ describe('middleware', () => {
   test('single', () => {
     const collectionSlug = 'c1';
 
-    const onClientEvent = jest.fn().mockImplementation(() => true);
+    const onClientEvent = jest
+      .fn()
+      .mockImplementation(() => true) as OnClientEvent;
 
     streamClient = new OpenSeaStreamClient({
       ...clientOpts,
@@ -194,11 +202,10 @@ describe('middleware', () => {
   test('filter out events', () => {
     const collectionSlug = 'c1';
 
-    const onClientEvent = jest
-      .fn()
-      .mockImplementation(
-        (_c, _e, event) => event.payload.chain === 'ethereum'
-      );
+    const onClientEvent = jest.fn().mockImplementation(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (_c, _e, event: any) => event.payload.chain.name === 'ethereum'
+    ) as OnClientEvent;
 
     streamClient = new OpenSeaStreamClient({
       ...clientOpts,
@@ -214,10 +221,10 @@ describe('middleware', () => {
     const onEvent = jest.fn();
 
     const ethereumListing = mockEvent(EventType.ITEM_LISTED, {
-      chain: 'ethereum'
+      chain: { name: 'ethereum' }
     });
     const polygonListing = mockEvent(EventType.ITEM_LISTED, {
-      chain: 'polygon'
+      chain: { name: 'polygon' }
     });
 
     streamClient.onEvents(

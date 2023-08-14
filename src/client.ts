@@ -1,5 +1,5 @@
 import { Socket, Channel } from 'phoenix';
-import { collectionTopic } from './helpers';
+import { collectionTopic } from './helpers.js';
 import {
   ClientConfig,
   BaseStreamMessage,
@@ -18,8 +18,8 @@ import {
   Network,
   OnClientEvent,
   OrderValidationEvent
-} from './types';
-import { ENDPOINTS } from './constants';
+} from './types.js';
+import { ENDPOINTS } from './constants.js';
 
 export class OpenSeaStreamClient {
   private socket: Socket;
