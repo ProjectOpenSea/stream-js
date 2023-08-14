@@ -8,6 +8,7 @@ const config: Config.InitialOptions = {
   id: pack.name,
   modulePaths: ['<rootDir>/src'],
   preset: 'ts-jest/presets/default-esm',
+  extensionsToTreatAsEsm: ['.ts'],
   testEnvironment: 'jsdom',
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1'
