@@ -31,34 +31,6 @@ export enum Network {
   TESTNET = 'testnet'
 }
 
-export enum Chain {
-  ETHEREUM = 'ethereum',
-  MATIC = 'matic',
-  KLAYTN = 'klaytn',
-  BSC = 'bsc',
-  SOLANA = 'solana',
-  ARBITRUM = 'arbitrum',
-  ARBITRUM_NOVA = 'arbitrum_nova',
-  AVALANCHE = 'avalanche',
-  OPTIMISM = 'optimism',
-  BASE = 'base',
-  ZORA = 'zora',
-
-  // Testnets
-  SEPOLIA = 'sepolia',
-  RINKEBY = 'rinkeby',
-  MUMBAI = 'mumbai',
-  BAOBAB = 'baobab',
-  BSC_TESTNET = 'bsctestnet',
-  GOERLI = 'goerli',
-  SOLDEV = 'soldev',
-  ARBITRUM_GOERLI = 'arbitrum_goerli',
-  AVALANCHE_FUJI = 'avalanche_fuji',
-  OPTIMISM_GOERLI = 'optimism_goerli',
-  BASE_GOERLI = 'base_goerli',
-  ZORA_TESTNET = 'zora_testnet'
-}
-
 export enum EventType {
   ITEM_METADATA_UPDATED = 'item_metadata_updated',
   ITEM_LISTED = 'item_listed',
@@ -94,6 +66,7 @@ export type Payload = {
   collection: {
     slug: string;
   };
+  chain: string;
 };
 
 export type BaseStreamMessage<Payload> = {
@@ -244,7 +217,6 @@ export interface CollectionOfferEventPayload extends Payload {
   collection_criteria: object;
   asset_contract_criteria: object;
   event_timestamp: string;
-  chain: Chain;
 }
 
 export type CollectionOfferEvent =
