@@ -66,6 +66,7 @@ export type Payload = {
   collection: {
     slug: string;
   };
+  chain: string;
 };
 
 export type BaseStreamMessage<Payload> = {
