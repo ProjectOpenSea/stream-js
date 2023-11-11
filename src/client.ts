@@ -72,7 +72,7 @@ export class OpenSeaStreamClient {
   private error(message: unknown) {
     if (this.logLevel <= LogLevel.ERROR) {
       message && message.toString() === '[object Object]'
-        ? console.log(message)
+        ? console.error(message)
         : console.error(`[ERROR]: ${message}`);
     }
   }
