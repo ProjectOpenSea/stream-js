@@ -53,25 +53,25 @@ export class OpenSeaStreamClient {
 
   private debug(message: unknown) {
     if (this.logLevel <= LogLevel.DEBUG) {
-      console.debug(`[DEBUG]: ${message}`);
+      console.debug('[DEBUG]:', message);
     }
   }
 
   private info(message: unknown) {
     if (this.logLevel <= LogLevel.INFO) {
-      console.info(`[INFO]: ${message}`);
+      console.info('[INFO]:', message);
     }
   }
 
   private warn(message: unknown) {
     if (this.logLevel <= LogLevel.WARN) {
-      console.warn(`[WARN]: ${message}`);
+      console.warn('[WARN]:', message);
     }
   }
 
   private error(message: unknown) {
     if (this.logLevel <= LogLevel.ERROR) {
-      console.error(`[ERROR]: ${message}`);
+      console.error('[ERROR]:', message);
     }
   }
 
