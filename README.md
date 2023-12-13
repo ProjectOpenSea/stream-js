@@ -9,9 +9,9 @@
 [![License][license-badge]][license-link]
 [![Docs][docs-badge]][docs-link]
 
-# OpenSea Stream API - JavaScript SDK
+# OpenSea Stream API - TypeScript SDK
 
-A Javascript SDK for receiving updates from the OpenSea Stream API - pushed over websockets. We currently support the following event types on a per-collection basis:
+A TypeScript SDK for receiving updates from the OpenSea Stream API - pushed over websockets. We currently support the following event types on a per-collection basis:
 
 - item listed
 - item sold
@@ -37,28 +37,28 @@ We recommend switching to Node.js version 16 to make sure common crypto dependen
 
 ## Authentication
 
-In order to make onboarding easy, we've integrated the OpenSea Stream API with our existing API key system. The API keys you have been using for the REST API should work here as well. If you don't already have one, request an API key from us [here](https://docs.opensea.io/reference/request-an-api-key).
+In order to make onboarding easy, we've integrated the OpenSea Stream API with our existing API key system. The API keys you have been using for the REST API should work here as well. If you don't already have one, you can create an API key in your OpenSea account settings.
 
 ## Create a client
 
 ### Browser
 
-```javascript
+```typescript
 import { OpenSeaStreamClient } from '@opensea/stream-js';
 
 const client = new OpenSeaStreamClient({
-  token: 'openseaApiKey'
+  token: 'YOUR_OPENSEA_API_KEY'
 });
 ```
 
 ### Node.JS
 
-```javascript
+```typescript
 import { OpenSeaStreamClient } from '@opensea/stream-js';
 import { WebSocket } from 'ws';
 
 const client = new OpenSeaStreamClient({
-  token: 'openseaApiKey',
+  token: 'YOUR_OPENSEA_API_KEY',
   connectOptions: {
     transport: WebSocket
   }
@@ -68,8 +68,8 @@ const client = new OpenSeaStreamClient({
 You can also optionally pass in:
 
 - a `network` if you would like to access testnet networks.
-  - The default value is `Network.MAINNET`, which represents the following blockchains: Ethereum, Polygon mainnet, Klaytn mainnet, and Solana mainnet
-  - Can also select `Network.TESTNET`, which represents the following blockchains: Rinkeby, Polygon testnet (Mumbai), and Klaytn testnet (Baobab).
+  - The default value is `Network.MAINNET` for all mainnet chains
+  - Can also select `Network.TESTNET` for all testnet chains
 - `apiUrl` if you would like to access another OpenSea Stream API endpoint. Not needed if you provide a network or use the default values.
 - an `onError` callback to handle errors. The default behavior is to `console.error` the error.
 - a `logLevel` to set the log level. The default is `LogLevel.INFO`.
@@ -82,31 +82,29 @@ The OpenSea Stream API is available on the following networks:
 
 `wss://stream.openseabeta.com/socket`
 
-Mainnet supports events from the following blockchains: Ethereum, Polygon mainnet, Klaytn mainnet, and Solana mainnet.
-
 ### Testnet
 
 `wss://testnets-stream.openseabeta.com/socket`
 
-Testnet supports events from the following blockchains: Rinkeby, Polygon testnet (Mumbai), and Klaytn testnet (Baobab).
-
 To create testnet instance of the client, you can create it with the following arguments:
 
-```javascript
+```typescript
 import { OpenSeaStreamClient, Network } from '@opensea/stream-js';
 
 const client = new OpenSeaStreamClient({
   network: Network.TESTNET,
-  token: 'openseaApiKey'
+  token: 'YOUR_OPENSEA_API_KEY'
 });
 ```
+
+An API key is not needed for testnets, so any value is okay for `token` when network is `Network.TESTNET`.
 
 ## Manually connecting to the socket (optional)
 
 The client will automatically connect to the socket as soon as you subscribe to the first channel.
 If you would like to connect to the socket manually (before that), you can do so:
 
-```javascript
+```typescript
 client.connect();
 ```
 
@@ -116,7 +114,7 @@ After successfully connecting to our websocket it is time to listen to specific 
 
 We will only send out metadata updates when we detect that the metadata provided in `tokenURI` has changed from what OpenSea has previously cached.
 
-```javascript
+```typescript
 client.onItemMetadataUpdated('collection-slug', (event) => {
   // handle event
 });
@@ -124,7 +122,7 @@ client.onItemMetadataUpdated('collection-slug', (event) => {
 
 ## Streaming item listed events
 
-```javascript
+```typescript
 client.onItemListed('collection-slug', (event) => {
   // handle event
 });
@@ -132,7 +130,7 @@ client.onItemListed('collection-slug', (event) => {
 
 ## Streaming item sold events
 
-```javascript
+```typescript
 client.onItemSold('collection-slug', (event) => {
   // handle event
 });
@@ -140,7 +138,7 @@ client.onItemSold('collection-slug', (event) => {
 
 ## Streaming item transferred events
 
-```javascript
+```typescript
 client.onItemTransferred('collection-slug', (event) => {
   // handle event
 });
@@ -148,7 +146,7 @@ client.onItemTransferred('collection-slug', (event) => {
 
 ## Streaming bids and offers
 
-```javascript
+```typescript
 client.onItemReceivedBid('collection-slug', (event) => {
   // handle event
 });
@@ -160,7 +158,7 @@ client.onItemReceivedOffer('collection-slug', (event) => {
 
 ## Streaming multiple event types
 
-```javascript
+```typescript
 client.onEvents(
   'collection-slug',
   [EventType.ITEM_RECEIVED_OFFER, EventType.ITEM_TRANSFERRED],
@@ -172,7 +170,7 @@ client.onEvents(
 
 ## Streaming order cancellations events
 
-```javascript
+```typescript
 client.onItemCancelled('collection-slug', (event) => {
   // handle event
 });
@@ -192,7 +190,7 @@ Types are included to make working with our event payload objects easier.
 
 All subscription methods return a callback function that will unsubscribe from a stream when invoked.
 
-```javascript
+```typescript
 const unsubscribe = client.onItemMetadataUpdated('collection-slug', noop);
 
 unsubscribe();
@@ -200,7 +198,7 @@ unsubscribe();
 
 ## From the socket
 
-```javascript
+```typescript
 client.disconnect();
 ```
 
