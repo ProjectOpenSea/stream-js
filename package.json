@@ -66,7 +66,6 @@
     "crypto",
     "ethereum",
     "javascript",
-    "typescript",
     "marketplace",
     "nft",
     "node",
@@ -75,6 +74,7 @@
     "project-opensea",
     "sdk",
     "smart-contracts",
+    "typescript",
     "websocket"
   ],
   "engines": {
