@@ -27,11 +27,28 @@ Documentation: https://docs.opensea.io/reference/stream-api-overview
 
 # Installation
 
-We recommend switching to Node.js version 16 to make sure common crypto dependencies work. Our minimum supported version is 16.11.0.
+Please use Node.js version 16 or greater to make sure common crypto dependencies work.
 
-- Install this package with `npm install @opensea/stream-js`
-- **NodeJS only:** Install the WebSocket library with `npm install ws`
-- Install the required dev-dependency to use the Phoenix client for web socket connections `npm install --save-dev @types/phoenix`
+- Install this package: `npm install @opensea/stream-js`
+- Install types for phoenix: `npm install --save-dev @types/phoenix`
+- **NodeJS only:**
+
+  - Install required libraries: `npm install ws node-localstorage`
+  - Import and include the libraries in `connectOptions:
+
+    ```typescript
+    import { WebSocket } from 'ws';
+    import { LocalStorage } from 'node-localstorage';
+
+    const client = new OpenSeaStreamClient({
+      network: Network.TESTNET,
+      token: 'YOUR_API_KEY',
+      connectOptions: {
+        transport: WebSocket,
+        sessionStorage: LocalStorage
+      }
+    });
+    ```
 
 # Getting Started
 
