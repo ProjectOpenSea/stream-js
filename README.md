@@ -34,7 +34,7 @@ Please use Node.js version 16 or greater to make sure common crypto dependencies
 - **NodeJS only:**
 
   - Install required libraries: `npm install ws node-localstorage`
-  - Import and include the libraries in `connectOptions:
+  - Import and include the libraries in `connectOptions`:
 
     ```typescript
     import { WebSocket } from 'ws';
