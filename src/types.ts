@@ -86,7 +86,7 @@ export type Trait = {
 
 interface ExtendedItemMetadataType extends BaseItemMetadataType {
   description: string | null;
-  backrgound_color: string | null;
+  background_color: string | null;
   traits: Trait[];
 }
 
