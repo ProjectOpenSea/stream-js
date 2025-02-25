@@ -92,4 +92,4 @@ Repository admins can use `npm version patch` to create a new patch version.
 - For minor version updates, use `npm version minor`.
 - For major version updates, use `npm version major`.
 
-When creating a new version, submit a PR listing all the chanages that you'd like to roll out with this change (since the last major version).
+When creating a new version, submit a PR listing all the changes that you'd like to roll out with this change (since the last major version).
