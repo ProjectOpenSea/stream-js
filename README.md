@@ -12,7 +12,7 @@
 # OpenSea Stream API - TypeScript SDK
 
 > [!IMPORTANT]  
-> The OpenSea Stream API has been deprecated. Please refer to our [documentation](https://docs.opensea.io/reference/api-overview) for the latest - you can replace usage with [Get Events](https://docs.opensea.io/reference/list_events).
+> The OpenSea Stream API is currently under maintenance and will be restored shortly.
 
 A TypeScript SDK for receiving updates from the OpenSea Stream API - pushed over websockets. We currently support the following event types on a per-collection basis:
 
