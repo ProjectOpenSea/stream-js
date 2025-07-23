@@ -11,9 +11,6 @@
 
 # OpenSea Stream API - TypeScript SDK
 
-> [!IMPORTANT]  
-> The OpenSea Stream API is currently under maintenance and will be restored shortly.
-
 A TypeScript SDK for receiving updates from the OpenSea Stream API - pushed over websockets. We currently support the following event types on a per-collection basis:
 
 - item listed
