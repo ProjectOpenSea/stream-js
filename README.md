@@ -69,37 +69,18 @@ const client = new OpenSeaStreamClient({
 
 You can also optionally pass in:
 
-- a `network` if you would like to access testnet networks.
-  - The default value is `Network.MAINNET` for all mainnet chains
-  - Can also select `Network.TESTNET` for all testnet chains
+- a `network` parameter (defaults to `Network.MAINNET`)
 - `apiUrl` if you would like to access another OpenSea Stream API endpoint. Not needed if you provide a network or use the default values.
 - an `onError` callback to handle errors. The default behavior is to `console.error` the error.
 - a `logLevel` to set the log level. The default is `LogLevel.INFO`.
 
 ## Available Networks
 
-The OpenSea Stream API is available on the following networks:
+The OpenSea Stream API is available on mainnet:
 
 ### Mainnet
 
 `wss://stream.openseabeta.com/socket`
-
-### Testnet
-
-`wss://testnets-stream.openseabeta.com/socket`
-
-To create testnet instance of the client, you can create it with the following arguments:
-
-```typescript
-import { OpenSeaStreamClient, Network } from '@opensea/stream-js';
-
-const client = new OpenSeaStreamClient({
-  network: Network.TESTNET,
-  token: 'YOUR_OPENSEA_API_KEY'
-});
-```
-
-An API key is not needed for testnets, so any value is okay for `token` when network is `Network.TESTNET`.
 
 ## Manually connecting to the socket (optional)
 

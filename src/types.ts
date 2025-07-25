@@ -27,8 +27,7 @@ export type ClientConfig = {
 };
 
 export enum Network {
-  MAINNET = 'mainnet',
-  TESTNET = 'testnet'
+  MAINNET = 'mainnet'
 }
 
 export enum EventType {
