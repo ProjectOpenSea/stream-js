@@ -14,7 +14,7 @@ export type OnClientEvent = <Payload>(
  * @param connectOptions `SocketConnectOption` type to use to connect to the Stream API socket.
  * @param onError a callback function to use whenever errors occur in the SDK.
  * @param logLevel `LogLevel` type to define the amount of logging the SDK should provide.
- * @param onEvent a callback function to use whenever an event is emmited in the SDK. Can be used to globally apply some logic, e.g emitting metric/logging etc. If the onEvent handler returns false, event will be filtered and the subscription callback won't be invoked.
+ * @param onEvent a callback function to use whenever an event is emitted in the SDK. Can be used to globally apply some logic, e.g emitting metric/logging etc. If the onEvent handler returns false, event will be filtered and the subscription callback won't be invoked.
  */
 export type ClientConfig = {
   network?: Network;
@@ -86,7 +86,7 @@ export type Trait = {
 
 interface ExtendedItemMetadataType extends BaseItemMetadataType {
   description: string | null;
-  backrgound_color: string | null;
+  background_color: string | null;
   traits: Trait[];
 }
 
