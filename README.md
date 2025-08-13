@@ -8,6 +8,7 @@
 [![Coverage Status][coverage-badge]][coverage-link]
 [![License][license-badge]][license-link]
 [![Docs][docs-badge]][docs-link]
+[![Twitter][twitter-badge]][twitter-link]
 
 # OpenSea Stream API - TypeScript SDK
 
@@ -205,3 +206,5 @@ See [the contributing guide](./.github/contributing.md) for detailed instruction
 [license-link]: https://github.com/ProjectOpenSea/stream-js/blob/main/LICENSE
 [docs-badge]: https://img.shields.io/badge/Stream.js-documentation-informational
 [docs-link]: https://github.com/ProjectOpenSea/stream-js#getting-started
+[twitter-badge]: https://img.shields.io/twitter/follow/opensea
+[twitter-link]: https://x.com/opensea
