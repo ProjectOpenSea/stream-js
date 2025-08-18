@@ -81,7 +81,7 @@ export class OpenSeaStreamClient {
   };
 
   public disconnect = (
-    callback = () => this.info(`Succesfully disconnected from socket`)
+    callback = () => this.info(`Successfully disconnected from socket`)
   ) => {
     this.channels.clear();
     return this.socket.disconnect(callback);
@@ -131,7 +131,7 @@ export class OpenSeaStreamClient {
       channel.leave().receive('ok', () => {
         this.channels.delete(topic);
         this.info(
-          `Succesfully left channel "${topic}" listening for ${eventType}`
+          `Successfully left channel "${topic}" listening for ${eventType}`
         );
       });
     };
