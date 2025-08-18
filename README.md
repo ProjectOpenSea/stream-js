@@ -21,7 +21,7 @@ A TypeScript SDK for receiving updates from the OpenSea Stream API - pushed over
 - item received offer
 - item received bid
 
-This is a best effort delivery messaging system. Messages that are not received due to connection errors will not be re-sent. Messages may be delivered out of order. This SDK is offered as a beta experience as we work with developers in the ecosystem to make this a more robust and reliable system.
+This is a best effort delivery messaging system. Messages that are not received due to connection errors will not be resent. Messages may be delivered out of order. This SDK is offered as a beta experience as we work with developers in the ecosystem to make this a more robust and reliable system.
 
 Documentation: https://docs.opensea.io/reference/stream-api-overview
 
