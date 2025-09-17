@@ -1,4 +1,4 @@
-import type { SocketConnectOption } from 'phoenix';
+import type { SocketConnectOptions } from 'phoenix';
 
 export type OnClientEvent = <Payload>(
   collection: string,
@@ -11,7 +11,7 @@ export type OnClientEvent = <Payload>(
  * @param token API key to use for API
  * @param network `Network` type to use. Defaults to `Network.MAINNET`
  * @param apiUrl Optional base URL to use for the API.
- * @param connectOptions `SocketConnectOption` type to use to connect to the Stream API socket.
+ * @param connectOptions `SocketConnectOptions` type to use to connect to the Stream API socket.
  * @param onError a callback function to use whenever errors occur in the SDK.
  * @param logLevel `LogLevel` type to define the amount of logging the SDK should provide.
  * @param onEvent a callback function to use whenever an event is emitted in the SDK. Can be used to globally apply some logic, e.g emitting metric/logging etc. If the onEvent handler returns false, event will be filtered and the subscription callback won't be invoked.
@@ -20,7 +20,7 @@ export type ClientConfig = {
   network?: Network;
   apiUrl?: string;
   token: string;
-  connectOptions?: Partial<SocketConnectOption>;
+  connectOptions?: Partial<SocketConnectOptions>;
   onError?: (error: unknown) => void;
   logLevel?: LogLevel;
   onEvent?: OnClientEvent;
