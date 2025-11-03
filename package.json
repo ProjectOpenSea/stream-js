@@ -5,7 +5,10 @@
   "license": "MIT",
   "author": "OpenSea Developers",
   "homepage": "https://docs.opensea.io/reference/stream-api-overview",
-  "repository": "https://github.com/ProjectOpenSea/stream-js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ProjectOpenSea/stream-js.git"
+  },
   "bugs": {
     "url": "https://github.com/ProjectOpenSea/stream-js/issues"
   },
