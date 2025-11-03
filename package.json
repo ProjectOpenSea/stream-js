@@ -29,10 +29,10 @@
     "eslint": "eslint . --max-warnings 0 --ext .js,.ts --fix",
     "lint:check": "concurrently \"npm run check-types\" \"npm run eslint\" \"npm run prettier:check\" \"npm run prettier:check:package.json\"",
     "prepare": "husky install",
-    "prepublish": "npm run build",
     "prettier:check": "prettier --check .",
     "prettier:check:package.json": "prettier-package-json --list-different",
     "prettier:fix": "prettier --write . && prettier-package-json --write package.json",
+    "prepublish": "npm run build",
     "test": "jest"
   },
   "sideEffects": false,
