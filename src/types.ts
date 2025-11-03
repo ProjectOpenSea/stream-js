@@ -248,6 +248,7 @@ export interface OrderValidationEventPayload {
   collection: {
     slug: string;
   };
+  item: BaseItemType;
 }
 
 export type OrderValidationEvent =
