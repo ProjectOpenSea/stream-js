@@ -221,6 +221,11 @@ export interface CollectionOfferEventPayload extends Payload {
 export type CollectionOfferEvent =
   BaseStreamMessage<CollectionOfferEventPayload>;
 
+export type TraitCriteria = {
+  trait_type: string;
+  trait_name: string;
+};
+
 export interface TraitOfferEventPayload extends Payload {
   quantity: number;
   created_date: string;
@@ -232,7 +237,8 @@ export interface TraitOfferEventPayload extends Payload {
   payment_token: PaymentToken;
   collection_criteria: object;
   asset_contract_criteria: object;
-  trait_criteria: object;
+  trait_criteria?: TraitCriteria;
+  trait_criteria_list?: TraitCriteria[];
   event_timestamp: string;
 }
 
