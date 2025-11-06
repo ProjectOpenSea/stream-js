@@ -109,6 +109,14 @@ export type PaymentToken = {
   usd_price: string;
 };
 
+export type AssetContractCriteria = {
+  address: string;
+};
+
+export type CollectionIdentifier = {
+  slug: string;
+};
+
 export interface ItemListedEventPayload extends Payload {
   quantity: number;
   listing_type: string;
@@ -213,8 +221,8 @@ export interface CollectionOfferEventPayload extends Payload {
   base_price: string;
   order_hash: string;
   payment_token: PaymentToken;
-  collection_criteria: object;
-  asset_contract_criteria: object;
+  collection_criteria: CollectionIdentifier;
+  asset_contract_criteria: AssetContractCriteria;
   event_timestamp: string;
 }
 
@@ -235,8 +243,8 @@ export interface TraitOfferEventPayload extends Payload {
   base_price: string;
   order_hash: string;
   payment_token: PaymentToken;
-  collection_criteria: object;
-  asset_contract_criteria: object;
+  collection_criteria: CollectionIdentifier;
+  asset_contract_criteria: AssetContractCriteria;
   trait_criteria?: TraitCriteria;
   trait_criteria_list?: TraitCriteria[];
   event_timestamp: string;
