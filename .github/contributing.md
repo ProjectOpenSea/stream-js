@@ -48,7 +48,7 @@ npm test
 To check the formatting of your code:
 
 ```sh
-npm run prettier
+npm run prettier:check
 ```
 
 If you get errors, you can fix them with:
