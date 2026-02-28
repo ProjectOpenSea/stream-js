@@ -40,7 +40,7 @@ npm run build
 ### Running tests
 
 ```sh
-yarn test
+npm test
 ```
 
 ### Linting
