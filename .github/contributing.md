@@ -40,7 +40,7 @@ npm run build
 ### Running tests
 
 ```sh
-yarn test
+npm test
 ```
 
 ### Linting
@@ -48,7 +48,7 @@ yarn test
 To check the formatting of your code:
 
 ```sh
-npm run prettier
+npm run prettier:check
 ```
 
 If you get errors, you can fix them with:
