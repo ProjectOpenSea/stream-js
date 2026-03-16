@@ -174,7 +174,7 @@ Types are included to make working with our event payload objects easier.
 All subscription methods return a callback function that will unsubscribe from a stream when invoked.
 
 ```typescript
-const unsubscribe = client.onItemMetadataUpdated('collection-slug', noop);
+const unsubscribe = client.onItemMetadataUpdated('collection-slug', () => {});
 
 unsubscribe();
 ```
