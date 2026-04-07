@@ -14,56 +14,49 @@
   },
   "type": "module",
   "exports": {
-    "require": "./dist/index.cjs",
-    "default": "./dist/index.modern.js",
-    "types": "./dist/index.d.ts"
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.module.js",
+  "module": "./dist/index.js",
   "files": [
     "dist",
     "src"
   ],
   "scripts": {
-    "build": "microbundle",
+    "build": "tsup",
     "check-types": "tsc --noEmit",
-    "coverage": "npm run test -- --coverage --collectCoverageFrom='./src/**'",
-    "dev": "microbundle watch",
-    "eslint": "eslint . --max-warnings 0 --ext .js,.ts --fix",
-    "lint:check": "concurrently \"npm run check-types\" \"npm run eslint\" \"npm run prettier:check\" \"npm run prettier:check:package.json\"",
-    "prepare": "husky install",
-    "prettier:check": "prettier --check .",
-    "prettier:check:package.json": "prettier-package-json --list-different",
-    "prettier:fix": "prettier --write . && prettier-package-json --write package.json",
+    "coverage": "vitest run --coverage",
+    "dev": "tsup --watch",
+    "format": "biome format --config-path ../.. --write .",
+    "format:check": "biome format --config-path ../.. .",
+    "lint": "biome check --config-path ../.. .",
+    "lint:check": "concurrently \"npm run check-types\" \"biome check --config-path ../.. .\"",
+    "lint:fix": "biome check --config-path ../.. --write .",
     "prepublish": "npm run build",
-    "test": "jest"
+    "test": "vitest run"
   },
   "sideEffects": false,
-  "types": "./dist/index.d.ts",
   "dependencies": {
     "phoenix": "^1.6.15"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.0",
     "@types/phoenix": "^1.5.6",
     "@types/ws": "^8.5.4",
-    "@typescript-eslint/eslint-plugin": "^5.59.6",
-    "@typescript-eslint/parser": "^5.59.6",
     "concurrently": "^9.0.0",
-    "eslint": "^8.41.0",
-    "eslint-config-prettier": "^10.0.0",
-    "eslint-plugin-prettier": "^5.0.1",
-    "husky": "^8.0.3",
-    "jest": "^29.5.0",
-    "jest-environment-jsdom": "^29.5.0",
-    "jest-websocket-mock": "^2.4.0",
-    "lint-staged": "^16.0.0",
-    "microbundle": "^0.15.1",
-    "prettier": "^3.1.1",
-    "prettier-package-json": "^2.6.4",
-    "ts-jest": "^29.1.0",
+    "jsdom": "^26.0.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
+    "tsup": "^8.3.0",
+    "typescript": "^6.0.2",
+    "vitest": "^3.2.4"
   },
   "keywords": [
     "collectibles",
@@ -84,17 +77,5 @@
   "engines": {
     "node": ">=16.11.0"
   },
-  "lint-staged": {
-    "package.json": [
-      "prettier-package-json --write"
-    ],
-    "**/*.{ts,tsx,js,jsx,html,md,mdx,yml,json}": [
-      "prettier --write"
-    ],
-    "**/*.{ts,tsx,js,jsx}": [
-      "eslint --cache --fix"
-    ]
-  },
-  "source": "src/index.ts",
-  "unpkg": "./dist/index.umd.js"
+  "source": "src/index.ts"
 }

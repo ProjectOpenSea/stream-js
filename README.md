@@ -174,7 +174,7 @@ Types are included to make working with our event payload objects easier.
 All subscription methods return a callback function that will unsubscribe from a stream when invoked.
 
 ```typescript
-const unsubscribe = client.onItemMetadataUpdated('collection-slug', noop);
+const unsubscribe = client.onItemMetadataUpdated('collection-slug', () => {});
 
 unsubscribe();
 ```
@@ -187,7 +187,9 @@ client.disconnect();
 
 ## Contributing
 
-See [the contributing guide](./.github/contributing.md) for detailed instructions on how to get started with this project.
+This repository is a read-only mirror synced from an internal monorepo. We can't merge pull requests directly, but we review every one — if your fix or idea is solid, we'll recreate it internally and it will ship in the next release.
+
+Issues and bug reports are the best way to contribute. See [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 
 ## License
 
