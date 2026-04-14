@@ -36,11 +36,10 @@
     "check-types": "tsc --noEmit",
     "coverage": "vitest run --coverage",
     "dev": "tsup --watch",
-    "format": "biome format --config-path ../.. --write .",
-    "format:check": "biome format --config-path ../.. .",
-    "lint": "biome check --config-path ../.. .",
-    "lint:check": "concurrently \"npm run check-types\" \"biome check --config-path ../.. .\"",
-    "lint:fix": "biome check --config-path ../.. --write .",
+    "format": "biome format --config-path . --write .",
+    "format:check": "biome format --config-path . .",
+    "lint": "biome check --config-path . .",
+    "lint:fix": "biome check --config-path . --write .",
     "prepublish": "npm run build",
     "test": "vitest run"
   },
@@ -51,12 +50,13 @@
   "devDependencies": {
     "@types/phoenix": "^1.5.6",
     "@types/ws": "^8.5.4",
-    "concurrently": "^9.0.0",
+    "concurrently": "^9.2.1",
     "jsdom": "^26.0.0",
     "ts-node": "^10.9.1",
     "tsup": "^8.3.0",
     "typescript": "^6.0.2",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "@biomejs/biome": "^2.4.10"
   },
   "keywords": [
     "collectibles",
@@ -75,7 +75,7 @@
     "websocket"
   ],
   "engines": {
-    "node": ">=16.11.0"
+    "node": ">=18.0.0"
   },
   "source": "src/index.ts"
 }

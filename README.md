@@ -37,7 +37,15 @@ Please use Node.js version 16 or greater to make sure common crypto dependencies
 
 ## Authentication
 
-In order to make onboarding easy, we've integrated the OpenSea Stream API with our existing API key system. The API keys you have been using for the REST API should work here as well. If you don't already have one, you can create an API key in your OpenSea account settings.
+In order to make onboarding easy, we've integrated the OpenSea Stream API with our existing API key system. The API keys you have been using for the REST API should work here as well.
+
+Get an API key instantly (no signup needed):
+
+```bash
+curl -s -X POST https://api.opensea.io/api/v2/auth/keys | jq -r '.api_key'
+```
+
+Or get a full key at [opensea.io/settings/developer](https://opensea.io/settings/developer) for higher rate limits.
 
 ## Create a client
 

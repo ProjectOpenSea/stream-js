@@ -1,10 +1,3 @@
-import { defineConfig } from "tsup"
+import baseConfig from "./tsup.config.base"
 
-export default defineConfig({
-  entry: ["src/index.ts"],
-  format: ["esm", "cjs"],
-  dts: true,
-  sourcemap: true,
-  clean: true,
-  target: "node16",
-})
+export default baseConfig

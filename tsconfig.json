@@ -1,16 +1,8 @@
 {
-  "include": ["./src/**/*.ts"],
+  "extends": "./tsconfig.node-esm.json",
   "compilerOptions": {
-    "target": "es2020",
-    "module": "commonjs",
-    "moduleResolution": "node",
     "outDir": "./dist",
-    "rootDir": "./src",
-    "strict": true,
-    "declaration": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "skipLibCheck": true,
-    "ignoreDeprecations": "6.0"
-  }
+    "rootDir": "./src"
+  },
+  "include": ["./src/**/*.ts"]
 }
