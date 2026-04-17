@@ -70,6 +70,7 @@ export type Payload = {
 
 export type BaseStreamMessage<Payload> = {
   event_type: string
+  version: number
   sent_at: string
   payload: Payload
 }

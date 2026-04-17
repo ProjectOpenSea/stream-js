@@ -133,6 +133,78 @@ describe("event streams", () => {
   })
 })
 
+describe("version", () => {
+  test("passes custom version to callback", () => {
+    const collectionSlug = "c1"
+
+    streamClient = new OpenSeaStreamClient({
+      ...clientOpts,
+      connectOptions: { transport: WebSocket },
+    })
+
+    const socket = getSocket(streamClient)
+    vi.spyOn(socket, "endPointURL").mockImplementation(
+      () => "ws://localhost:1234",
+    )
+
+    const onEvent = vi.fn()
+    streamClient.onEvents(collectionSlug, [EventType.ITEM_LISTED], event =>
+      onEvent(event),
+    )
+
+    const payload = mockEvent(
+      EventType.ITEM_LISTED,
+      {},
+      {
+        version: 1713300042000,
+      },
+    )
+
+    server.send(
+      encode({
+        topic: collectionTopic(collectionSlug),
+        event: EventType.ITEM_LISTED,
+        payload,
+      }),
+    )
+
+    expect(onEvent).toHaveBeenCalledWith(payload)
+    expect(onEvent.mock.calls[0][0].version).toBe(1713300042000)
+  })
+
+  test("includes default version in all events", () => {
+    const collectionSlug = "c1"
+
+    streamClient = new OpenSeaStreamClient({
+      ...clientOpts,
+      connectOptions: { transport: WebSocket },
+    })
+
+    const socket = getSocket(streamClient)
+    vi.spyOn(socket, "endPointURL").mockImplementation(
+      () => "ws://localhost:1234",
+    )
+
+    const onEvent = vi.fn()
+    streamClient.onEvents(collectionSlug, [EventType.ITEM_LISTED], event =>
+      onEvent(event),
+    )
+
+    const payload = mockEvent(EventType.ITEM_LISTED, {})
+
+    server.send(
+      encode({
+        topic: collectionTopic(collectionSlug),
+        event: EventType.ITEM_LISTED,
+        payload,
+      }),
+    )
+
+    expect(onEvent).toHaveBeenCalledWith(payload)
+    expect(onEvent.mock.calls[0][0].version).toBe(1713300000000)
+  })
+})
+
 describe("middleware", () => {
   test("single", () => {
     const collectionSlug = "c1"

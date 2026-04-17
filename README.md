@@ -171,6 +171,41 @@ client.onItemCancelled('collection-slug', (event) => {
 
 If you'd like to listen to an event from all collections use wildcard `*` for the `collectionSlug` parameter.
 
+# Event Versioning
+
+Every stream event includes a numeric `version` field that is **monotonically increasing per source entity**. Use it to handle out-of-order event delivery: when two events arrive for the same entity, the one with the higher `version` is the newer state.
+
+## Version scale depends on event type
+
+The backend emits whichever authoritative monotonic counter exists for the underlying entity, so the *scale* of `version` varies:
+
+| Event types | `version` semantic |
+| --- | --- |
+| `item_listed`, `item_cancelled`, `item_received_offer`, `item_received_bid`, `collection_offer`, `trait_offer`, `order_invalidate`, `order_revalidate` | Order revision counter (small monotonic integer per order) |
+| `item_transferred`, `item_sold`, `item_metadata_updated` | Epoch milliseconds of the event's source timestamp |
+
+Both representations are monotonic and sufficient for resolving out-of-order delivery, but the two scales are **not comparable to each other**. Never compare `version` across different event families or across unrelated entities — only compare versions for the same entity within the same event family.
+
+## Usage
+
+Scope your stored versions by event type (or by the source entity — order id for order-derived events, nft_id for item events):
+
+```typescript
+const latestOrderVersion = new Map<string, number>();
+
+client.onItemListed('*', (event) => {
+  const orderHash = event.payload.order_hash;
+  const prev = latestOrderVersion.get(orderHash) ?? 0;
+  if (event.version > prev) {
+    latestOrderVersion.set(orderHash, event.version);
+    // Process — this is newer state for this order
+  }
+  // Otherwise discard — we already have newer state for this order
+});
+```
+
+Multiple backend pods process events, DLQ replays can deliver older state, and normal Kafka processing can deliver events out of order. Comparing `version` within the same entity lets consumers always converge to the correct current state.
+
 # Types
 
 Types are included to make working with our event payload objects easier.

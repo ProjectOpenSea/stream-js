@@ -34,10 +34,13 @@ export const encode = ({
 export const mockEvent = <Payload = unknown>(
   eventType: EventType,
   payload: Payload,
+  overrides?: Partial<BaseStreamMessage<Payload>>,
 ): BaseStreamMessage<Payload> => {
   return {
     event_type: eventType,
+    version: 1713300000000,
     payload,
     sent_at: Date.now().toString(),
+    ...overrides,
   }
 }
