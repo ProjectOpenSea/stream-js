@@ -88,7 +88,7 @@ The OpenSea Stream API is available on mainnet:
 
 ### Mainnet
 
-`wss://stream.openseabeta.com/socket`
+`wss://stream-api.opensea.io/socket`
 
 ## Manually connecting to the socket (optional)
 
