@@ -24,6 +24,7 @@ pnpm run check-types   # TypeScript type checking
 | `src/helpers.ts` | Topic construction for Phoenix channel subscriptions |
 | `src/index.ts` | Public exports |
 | `test/client.spec.ts` | Unit tests with mock WebSocket |
+| `test/helpers.ts` | Test utilities for accessing private client internals (socket, channels) |
 | `test/mock-ws.ts` | Mock WebSocket server for testing |
 
 ## Review Checklist

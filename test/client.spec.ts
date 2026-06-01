@@ -343,3 +343,33 @@ describe("middleware", () => {
     streamClient.disconnect()
   })
 })
+
+describe("server-side event type filtering", () => {
+  test("onEvents passes event_types in join params", () => {
+    streamClient = new OpenSeaStreamClient(clientOpts)
+
+    const socket = getSocket(streamClient)
+    const channelSpy = vi.spyOn(socket, "channel")
+
+    streamClient.onEvents(
+      "c1",
+      [EventType.ITEM_LISTED, EventType.ITEM_SOLD],
+      vi.fn(),
+    )
+
+    expect(channelSpy).toHaveBeenCalledWith("collection:c1", {
+      event_types: [EventType.ITEM_LISTED, EventType.ITEM_SOLD],
+    })
+  })
+
+  test("individual on* methods do not pass event_types", () => {
+    streamClient = new OpenSeaStreamClient(clientOpts)
+
+    const socket = getSocket(streamClient)
+    const channelSpy = vi.spyOn(socket, "channel")
+
+    streamClient.onItemListed("c1", vi.fn())
+
+    expect(channelSpy).toHaveBeenCalledWith("collection:c1", {})
+  })
+})

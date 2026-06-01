@@ -87,8 +87,12 @@ export class OpenSeaStreamClient {
     return this.socket.disconnect(callback)
   }
 
-  private createChannel = (topic: string): Channel => {
-    const channel = this.socket.channel(topic)
+  private createChannel = (
+    topic: string,
+    eventTypes?: EventType[],
+  ): Channel => {
+    const params = eventTypes ? { event_types: eventTypes } : {}
+    const channel = this.socket.channel(topic, params)
     channel
       .join()
       .receive("ok", () => this.info(`Successfully joined channel "${topic}"`))
@@ -98,11 +102,11 @@ export class OpenSeaStreamClient {
     return channel
   }
 
-  private getChannel = (topic: string): Channel => {
+  private getChannel = (topic: string, eventTypes?: EventType[]): Channel => {
     let channel = this.channels.get(topic)
     if (!channel) {
       this.debug(`Creating channel for topic: "${topic}"`)
-      channel = this.createChannel(topic)
+      channel = this.createChannel(topic, eventTypes)
     }
     return channel
   }
@@ -111,12 +115,13 @@ export class OpenSeaStreamClient {
     eventType: EventType,
     collectionSlug: string,
     callback: Callback<Event>,
+    eventTypes?: EventType[],
   ) => {
     this.socket.connect()
 
     const topic = collectionTopic(collectionSlug)
     this.debug(`Fetching channel ${topic}`)
-    const channel = this.getChannel(topic)
+    const channel = this.getChannel(topic, eventTypes)
     this.debug(`Subscribing to ${eventType} events on ${topic}`)
 
     const onClientEvent = this.onEvent
@@ -231,7 +236,7 @@ export class OpenSeaStreamClient {
     callback: Callback<BaseStreamMessage<unknown>>,
   ) => {
     const subscriptions = eventTypes.map(eventType =>
-      this.on(eventType, collectionSlug, callback),
+      this.on(eventType, collectionSlug, callback, eventTypes),
     )
 
     return () => {
