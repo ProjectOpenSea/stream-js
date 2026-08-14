@@ -16,7 +16,7 @@
 > +const client = new OpenSeaStreamClient({ apiKey: "YOUR_API_KEY" });
 > ```
 >
-> Every event type, payload, and `on*` method is unchanged. There are a few small breaking changes, all covered in the [migration guide](https://github.com/ProjectOpenSea/opensea-sdk/blob/main/developerDocs/stream-migration.md):
+> Every event type, payload, and `on*` method is unchanged. There are a few small breaking changes, all covered in the [migration guide](https://github.com/ProjectOpenSea/opensea-sdk/blob/5be5f2bd3c5a4475d5a23eb8e0f5ca359f3df41e/developerDocs/stream-migration.md):
 >
 > - Node no longer needs `ws` or `node-localstorage`. Node 22+ and browsers supply a global `WebSocket`, and `sessionStorage` was only read by an unused long-poll fallback.
 > - `apiKey` replaces `token`, which still works but is deprecated.
