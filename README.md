@@ -1,3 +1,32 @@
+> [!IMPORTANT]
+> ## This package has moved to `@opensea/sdk`
+>
+> `@opensea/stream-js` is deprecated and no longer maintained. Its last published version is `0.4.0`. The Stream client now ships inside the OpenSea SDK at the `@opensea/sdk/stream` subpath, where it is actively maintained.
+>
+> ```bash
+> npm uninstall @opensea/stream-js ws node-localstorage
+> npm install @opensea/sdk
+> ```
+>
+> ```diff
+> -import { OpenSeaStreamClient } from "@opensea/stream-js";
+> +import { OpenSeaStreamClient } from "@opensea/sdk/stream";
+>
+> -const client = new OpenSeaStreamClient({ token: "YOUR_API_KEY" });
+> +const client = new OpenSeaStreamClient({ apiKey: "YOUR_API_KEY" });
+> ```
+>
+> Every event type, payload, and `on*` method is unchanged. There are a few small breaking changes, all covered in the [migration guide](https://github.com/ProjectOpenSea/opensea-sdk/blob/main/developerDocs/stream-migration.md):
+>
+> - Node no longer needs `ws` or `node-localstorage`. Node 22+ and browsers supply a global `WebSocket`, and `sessionStorage` was only read by an unused long-poll fallback.
+> - `apiKey` replaces `token`, which still works but is deprecated.
+> - Unsubscribing removes one handler instead of leaving the whole collection channel.
+> - Node 22 is the minimum, since Node 20 reached end of life in April 2026.
+>
+> The client no longer depends on `phoenix`, so importing `@opensea/sdk/stream` pulls in no third-party runtime code.
+>
+> Repository: [ProjectOpenSea/opensea-sdk](https://github.com/ProjectOpenSea/opensea-sdk) &nbsp;|&nbsp; Documentation: [docs.opensea.io/reference/stream-api](https://docs.opensea.io/reference/stream-api)
+
 <p align="center">
   <img src="./img/banner.png" />
 </p>
@@ -23,7 +52,7 @@ A TypeScript SDK for receiving updates from the OpenSea Stream API - pushed over
 
 This is a best effort delivery messaging system. Messages that are not received due to connection errors will not be re-sent. Messages may be delivered out of order. This SDK is offered as a beta experience as we work with developers in the ecosystem to make this a more robust and reliable system.
 
-Documentation: https://docs.opensea.io/reference/stream-js
+Documentation: https://docs.opensea.io/reference/stream-api
 
 # Installation
 
